@@ -44,6 +44,10 @@ Fractions, when the face has them and the text is a real recipe or a measurement
 
 Use real quotation marks (“ ” and ‘ ’), an apostrophe (’), and an ellipsis (…). Straight quotes from a keyboard look like code. An ampersand in the display face, once, is allowed in Editorial. It is not a logo.
 
+Hyphen `-` joins words. En dash `–` is a range (`Mon–Fri`, `pp. 12–14`). Em dash `—` is a rare break in a sentence, not a bullet and not a decoration between every phrase. Locale-specific marks and the order of currency are in `world.md`.
+
+Hyphenate only in a long measure of prose, with `hyphens: auto` and the right `lang` on the document. Do not hyphenate headings, buttons, or navigation. A hyphenated headline looks broken. If the language is not set, the browser will hyphenate wrong, so do not turn it on.
+
 ## Links and underlines
 
 Prose links are underlined. The underline skips the descenders (`text-decoration-skip-ink` is on). Nav links are not underlined. Do not invent a second link style (a colored pill, a gradient underline, an animated underline).

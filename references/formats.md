@@ -42,6 +42,26 @@ The current state is a sentence at the top: "All systems are up." or "Checkout i
 
 Below, a list of parts with a word for each (Up, Degraded, Down) and the time of the last change. An incident is a short log: time, what we know, what we are doing. No marketing.
 
+## Account
+
+The person's name, the way they sign in, and the few settings that are about them rather than about the work. Work settings stay in the product (`surfaces.md`). This page is identity, email, password, and leaving.
+
+Destructive acts (delete account, leave the team) are last, in their own group, and they confirm with the dialog in `components.md`. Show what will be deleted in one sentence.
+
+## Inbox
+
+A list of messages as `.rows`: who, the first line, the time. Unread is weight, not a colored dot alone. Opening one shows the thread as a document, the reply at the end. Do not card each message. Do not put a face on every system event. Faces are for people.
+
+## Onboarding
+
+One action that creates the first real object. The empty product in `surfaces.md` is this, and it is the whole first run. A second step is allowed only if the first object cannot exist without it.
+
+Do not tour the interface with a chain of modals. Do not explain a control that has a visible label. If a hint is required, it is one quiet line next to the thing, and it can be dismissed. After the first object exists, the hints go away. The person is in the product, not in a setup wizard wearing the product's colors.
+
+## Missing and down
+
+404, no matches, and outages are specified in `arrange.md`. They use this product's type and frame.
+
 ## Auth-adjacent legal pages
 
 Privacy, terms, and returns are documents. Set them as documents (`surfaces.md` docs): measure, real headings, the date they took effect at the top. Do not design them as marketing pages with illustrations. People came to read the obligation.

@@ -45,13 +45,14 @@ Then only what the work touches:
 | Any surface a person will see | `references/taste.md`, `references/craft.md`, `references/type.md`, `references/geometry.md`, `references/details.md` |
 | Color, theme, dark mode, a brand hex | `references/color.md`, then `references/foundations.md` |
 | Tokens, CSS, a new page file | `references/foundations.md` and `references/base.css` |
-| Page structure, navigation, breakpoints | `references/layout.md` and `references/behavior.md` |
+| Page structure, navigation, breakpoints, which container | `references/layout.md`, `references/arrange.md`, and `references/behavior.md` |
 | A control, menu, dialog, table, form, or state | `references/components.md` and `references/details.md` |
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
-| A landing page, a story, pricing, proof, photography | `references/narrative.md` and `references/surfaces.md` |
+| A landing page, a story, pricing, proof, photography | `references/narrative.md`, `references/art.md`, and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
 | A shop, a product, a bag, checkout | `references/commerce.md` |
-| A portfolio, event, help center, changelog, or status page | `references/formats.md` |
+| A portfolio, event, help center, changelog, status, account, or inbox | `references/formats.md` |
+| Another language, RTL, long labels, locale punctuation | `references/world.md` and `references/type.md` |
 | A chart, a table of numbers, a diagram, a timeline | `references/dataviz.md` and `references/information.md` |
 | A logo, a favicon, a wordmark, brand rules | `references/brand.md` |
 | Drawing icons | `references/icons.md` |
@@ -82,7 +83,7 @@ Refuse: hero, cards, a second accent, illustration.
 
 ### 3. Set tokens, then compose, then make controls
 
-Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`. A shop follows `references/commerce.md`. A phone layout follows `references/mobile.md`. A mark follows `references/brand.md`. Access is designed with `references/a11y.md`, not checked afterwards.
+Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`, after `references/arrange.md` picks the container. Pictures follow `references/art.md`. Another language follows `references/world.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`. A shop follows `references/commerce.md`. A phone layout follows `references/mobile.md`. A mark follows `references/brand.md`. Access is designed with `references/a11y.md`, not checked afterwards.
 
 ### 4. Write the words
 

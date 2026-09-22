@@ -45,6 +45,7 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 - A directory treatment appears only for peer objects with their own action.
 - Chrome is one treatment deep. No object carries a border, a shadow, and a tint.
 - The first viewport of a marketing page has the claim and the action.
+- The container matches the job in `arrange.md`. A carousel is not carrying the argument. Labels are not clipped by a fixed width (`world.md`).
 
 ## States
 

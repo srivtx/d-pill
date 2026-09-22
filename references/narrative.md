@@ -41,7 +41,7 @@ Price is part of the argument when the page is selling. A pricing page that hide
 
 ## Pictures
 
-One light, one time of day, one ratio, across every photograph on the page. Mixed stock sources look like a collage even when each photo is fine.
+How a picture is lit, graded, and cropped is `art.md`. On the page, the rule is one light, one time of day, one ratio. Mixed stock sources look like a collage even when each photo is fine.
 
 People and animals look toward the type or toward the work, not out of the frame. Hands doing the job are usually better than a face looking at the camera. A portrait that stares at you is Atelier, and it is the whole poster, not a thumbnail beside a paragraph.
 

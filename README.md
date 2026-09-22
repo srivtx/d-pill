@@ -81,6 +81,9 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `references/details.md` | Hairlines, focus, press, skeletons |
 | `references/behavior.md` | Distance, choice, scent, trust |
 | `references/narrative.md` | How a page argues, and how pictures behave |
+| `references/art.md` | Light, grade, crop, and when to have no picture |
+| `references/arrange.md` | Which container: list, table, gallery, form, feed |
+| `references/world.md` | Other languages, RTL, longer text, locale marks |
 | `references/brand.md` | Marks, lockups, clear space, misuse |
 | `references/icons.md` | Drawing a set that looks like one hand |
 | `references/dataviz.md` | Charts and tables that tell the truth |
@@ -88,7 +91,7 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `references/commerce.md` | Product, bag, checkout |
 | `references/mobile.md` | The phone as its own composition |
 | `references/a11y.md` | Access as a design constraint |
-| `references/formats.md` | Portfolio, event, help, changelog, status |
+| `references/formats.md` | Portfolio, event, help, changelog, status, account, inbox |
 | `references/systems.md` | Adding tokens and components without forking |
 | `references/direction.md` | The ten directions and their CSS |
 | `references/foundations.md` | How to edit tokens |
