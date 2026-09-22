@@ -4,11 +4,11 @@ How a mark, a name, and a palette stay one thing. Page color is in `color.md`. W
 
 ## The mark
 
-A mark is simple enough to hold at 16px and specific enough to recognize at a glance. It is one shape, or one shape and one note. It is not a miniature illustration of the product.
+A mark is simple enough to recognize at a glance. It is one object. It is not a miniature illustration of the product, and it is not a button.
 
-Build it on the same material as the interface: one fill, one cut, one accent at most. If the mark needs a gradient, a shadow, or a mockup to look like something, it is not finished.
+d-pill's mark is only the capsule, in `assets/mark.svg`. No plate, no badge, no rounded square behind it. The fill is a thin-film spectrum, the way a capsule looks under a hard light: magenta through violet, blue, cyan, green, gold, and back to rose, with a gloss along the top and a seam where the two halves meet. That rainbow belongs to the object. It does not become the interface. Pages still follow the direction. Do not paint a product in the mark's spectrum.
 
-d-pill's own mark is the reference for this rule, in `assets/mark.svg`: a capsule, ink on one side and paper on the other, a single clay square on the cut. Mass, emptiness, one note. Do not restyle it per page.
+Do not restyle the capsule per page. Do not put it inside another shape to "make a logo."
 
 ## Lockups
 
@@ -28,25 +28,26 @@ Smallest mark: 16px if the strokes still read. If they collapse, use a simpler o
 
 ## Color versions
 
-- On paper: ink mark, paper ground, accent note.
-- On ink: paper mark, ink ground. The accent stays, or drops out if it fails contrast.
-- One color: ink only, the accent becomes a cut (a gap), not a gray.
+- The full mark is the spectrum capsule. Use it at sizes where the film still reads, about 64px wide and up.
+- Below that, the gradient turns to mud. Use the silhouette: the capsule and the seam, one color, ink on paper or paper on ink.
+- Do not recolor the film to match a campaign, and do not replace it with flat stripes. The spectrum is continuous.
 
-Do not recolor the mark to match a campaign. Do not put it on a photograph unless the photograph has a quiet field and the one-color version still clears 3:1 against that field. When it does not, the mark sits on a solid `--bg` block.
+Do not put the capsule on a busy photograph. If the film will not read, use the silhouette on a solid `--bg` block.
 
 ## Misuse
 
 Refuse these, including when a template suggests them:
 
 - Rotate, skew, or italicize the mark.
-- Add a shadow, a glow, an outline, or a gradient.
-- Put it in a circle, a colored badge, or a rounded square it was not drawn for.
-- Recreate it in another typeface.
+- Put it in a circle, a colored badge, a button, or a rounded square.
+- Add a second shadow or a glow around it. The gloss is already in the file.
+- Replace the film with flat rainbow stripes, or with a single brand color, except the small silhouette.
+- Recreate it in type ("a pill icon from a font").
 - Crowd it with a tagline in the lockup. The tagline is a line of type somewhere else, or it does not exist.
 
 ## Favicon and platform
 
-The favicon is the mark, not a letter you typed into a generator. Apple touch icon and social avatar use the same drawing, with the clear-space padding already inside the file (the plate in `assets/mark.svg` is that padding). Do not let a platform round it into a different shape and then also add your own circle.
+The favicon is the silhouette of the capsule, not a letter you typed into a generator. Clear space sits outside the drawing. The viewBox has a little air so the stroke does not clip. Do not add your own plate behind it, and do not let a platform circle it and then also draw your own circle.
 
 `theme-color` is `--bg`, not the accent. The browser chrome should disappear into the page.
 

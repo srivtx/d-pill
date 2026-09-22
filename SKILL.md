@@ -27,7 +27,8 @@ You are designing an interface a person will use. Decide, then build. Paths belo
 3. The direction you committed for this surface.
 4. `references/base.css` for every token and class.
 5. The way of seeing in `references/sense.md`.
-6. The taste rules in `references/craft.md` for anything still open.
+6. The taste judgment in `references/taste.md`.
+7. The taste rules in `references/craft.md` for anything still open.
 
 If a brand exists, keep its type and color. Map them onto the roles in `references/foundations.md`. Apply structure, hierarchy, states, spacing, and the critique gate. Do not reskin a real brand into a different direction unless the user asks.
 
@@ -35,13 +36,13 @@ If nothing has been chosen, the unset look is not a design. Commit a direction. 
 
 ## What to read
 
-Always read this file, `references/sense.md`, and `references/direction.md` before drawing. Read `references/critique.md` before you call the UI done.
+Always read this file, `references/sense.md`, `references/taste.md`, and `references/direction.md` before drawing. Read `references/critique.md` before you call the UI done.
 
 Then only what the work touches:
 
 | Work | Read |
 |---|---|
-| Any surface a person will see | `references/craft.md`, `references/type.md`, `references/geometry.md`, `references/details.md` |
+| Any surface a person will see | `references/taste.md`, `references/craft.md`, `references/type.md`, `references/geometry.md`, `references/details.md` |
 | Color, theme, dark mode, a brand hex | `references/color.md`, then `references/foundations.md` |
 | Tokens, CSS, a new page file | `references/foundations.md` and `references/base.css` |
 | Page structure, navigation, breakpoints | `references/layout.md` and `references/behavior.md` |

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/mark.svg" width="96" height="96" alt="d-pill mark: a capsule split between ink and paper, with one clay square">
+  <img src="assets/mark.svg" width="220" height="88" alt="d-pill, an iridescent capsule">
 </p>
 
 <h1 align="center">d-pill</h1>
@@ -19,7 +19,7 @@ d-pill is how an agent should see, decide, and build a page. It is not a compone
 
 When a brand already exists, d-pill keeps the type and the color and fixes structure, hierarchy, states, and copy. When nothing has been chosen, it refuses the unset look: an interchangeable sans, a purple gradient, three equal cards, everything centered.
 
-The mark is the rule. Ink on one side, paper on the other, one clay note on the cut. Mass, emptiness, a single accent.
+The mark is only the capsule. The spectrum is thin-film color on that object, the way a pill looks under a hard light. It is not a theme for the page. The page still gets one direction, one accent, and a lot of quiet.
 
 ## Install
 
@@ -74,6 +74,7 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 |---|---|
 | `SKILL.md` | Procedure, laws, what to read |
 | `references/sense.md` | Seeing: proportion, material, the headline, what to leave out |
+| `references/taste.md` | The judgment: effort hidden, one weather, finish |
 | `references/type.md` | Setting type: pairing, leading, rag, figures |
 | `references/color.md` | Judging color: value, temperature, dark themes |
 | `references/geometry.md` | Optical alignment, radius, bleed, crops |

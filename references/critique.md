@@ -12,6 +12,7 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 - The refusal list in `craft.md` is honored, or a real brand explicitly overrides a specific item.
 - One accent. Status colors are only on status.
 - One material, as named in the commitment. Nothing on the page belongs to a second material (a shadow on paper, a glow on a tool, glass on a document).
+- The page looks like it did not try. One weather, the work louder than the chrome, the finish pass in `taste.md` done. The mark's spectrum has not leaked onto the interface.
 - The accent is not doing the hierarchy's job. Cover it, and the poster still has a shape.
 
 ## Hierarchy
