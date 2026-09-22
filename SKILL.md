@@ -49,6 +49,14 @@ Then only what the work touches:
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
 | A landing page, a story, pricing, proof, photography | `references/narrative.md` and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
+| A shop, a product, a bag, checkout | `references/commerce.md` |
+| A portfolio, event, help center, changelog, or status page | `references/formats.md` |
+| A chart, a table of numbers, a diagram, a timeline | `references/dataviz.md` and `references/information.md` |
+| A logo, a favicon, a wordmark, brand rules | `references/brand.md` |
+| Drawing icons | `references/icons.md` |
+| A phone layout | `references/mobile.md` |
+| Access, zoom, screen readers, motion sensitivity | `references/a11y.md`, then the floors in `references/critique.md` |
+| Adding a token or a component to a system | `references/systems.md` |
 | Labels, errors, empty copy, headlines | `references/writing.md` and `references/type.md` |
 | A color outside the safe band | `scripts/contrast.py`, then the band in `references/foundations.md` |
 
@@ -73,7 +81,7 @@ Refuse: hero, cards, a second accent, illustration.
 
 ### 3. Set tokens, then compose, then make controls
 
-Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`.
+Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`. A shop follows `references/commerce.md`. A phone layout follows `references/mobile.md`. A mark follows `references/brand.md`. Access is designed with `references/a11y.md`, not checked afterwards.
 
 ### 4. Write the words
 

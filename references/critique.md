@@ -63,6 +63,8 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 
 ## Access
 
+The design half of this list is `a11y.md`. These are the fails.
+
 - `html` has the right `lang`. The title is the view and the product.
 - One `h1`. Heading levels do not skip.
 - Inputs have visible labels. Icon buttons have accessible names. Images that mean something have alt; decorative images have empty alt.
