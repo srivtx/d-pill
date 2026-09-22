@@ -38,12 +38,7 @@ Do not give the eyebrow, the claim, the lede, the button, and the proof the same
 
 ## Optical details
 
-- Icons share the cap height of the label beside them. Nudge 1px if the glyph sits low. Do not mix filled and stroked icons.
-- A play triangle or a chevron that should feel centered often needs 1px toward its visual weight. Trust the eye, then check it in the browser.
-- Hairlines are 1px solid `--line` or `--line-strong`. Do not use a 0.5px border that disappears on a standard display.
-- Selection, focus, and current-item are three different states and they do not share one style. Selection is `--accent-soft`. Focus is the ring. Current is weight plus a mark.
-- Truncate a string only when the full string is available elsewhere (a title attribute is a last resort; a detail view is better). Never truncate the only copy of an error.
-- A row of money or metrics shares a baseline and uses `.num`. The unit is `.quiet`, not a second size of the figure.
+Edges, crops, radius, and visual weight are in `geometry.md`. Hairlines, focus versus press versus selection, truncation, and figures are in `details.md`. Type setting is in `type.md`. Color judgment is in `color.md`.
 
 ## Imagery
 

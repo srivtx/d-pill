@@ -22,6 +22,9 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 - The line under a display claim is a `.lede`, not a full-width paragraph.
 - A display headline is broken into phrases, as in `sense.md`. The last line is not one stranded word.
 - Neighboring text sizes are not adjacent steps on the ramp. One size is obviously larger.
+- Body leading fits the measure. Display leading is tight. Prose is not justified. Emphasis follows `type.md`.
+- In gray, the poster still has a shape. Accent is a note, not a second ground (`color.md`).
+- Rounded boxes that contain rounded boxes use a larger outer radius (`geometry.md`). Icons and labels align on the cap height, not the em box.
 - Vertical space comes from stack, section, or rows. There is no second rhythm of random margins.
 
 ## Color and type
@@ -48,6 +51,8 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 - The view specifies ideal, empty, loading, error, and partial where it shows a collection.
 - A destructive action either undoes or confirms, using the pattern in `components.md`.
 - The primary action does something. Pending keeps the width and changes the verb.
+- The action sits on the object it changes. One primary per region (`behavior.md`).
+- A selling page argues in the order in `narrative.md`. Proof is real or absent. The first and last actions share a destination.
 
 ## Writing
 

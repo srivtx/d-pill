@@ -41,13 +41,15 @@ Then only what the work touches:
 
 | Work | Read |
 |---|---|
-| Any surface a person will see | `references/craft.md` |
-| Tokens, theme, CSS, a new page file | `references/foundations.md` and `references/base.css` |
-| Page structure, navigation, breakpoints | `references/layout.md` |
-| A control, menu, dialog, table, form, or state | `references/components.md` |
+| Any surface a person will see | `references/craft.md`, `references/type.md`, `references/geometry.md`, `references/details.md` |
+| Color, theme, dark mode, a brand hex | `references/color.md`, then `references/foundations.md` |
+| Tokens, CSS, a new page file | `references/foundations.md` and `references/base.css` |
+| Page structure, navigation, breakpoints | `references/layout.md` and `references/behavior.md` |
+| A control, menu, dialog, table, form, or state | `references/components.md` and `references/details.md` |
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
-| A landing page, app shell, dashboard, settings, auth, docs, pricing, or first run | `references/surfaces.md` |
-| Labels, errors, empty copy, headlines | `references/writing.md` |
+| A landing page, a story, pricing, proof, photography | `references/narrative.md` and `references/surfaces.md` |
+| An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
+| Labels, errors, empty copy, headlines | `references/writing.md` and `references/type.md` |
 | A color outside the safe band | `scripts/contrast.py`, then the band in `references/foundations.md` |
 
 ## Procedure
@@ -71,7 +73,7 @@ Refuse: hero, cards, a second accent, illustration.
 
 ### 3. Set tokens, then compose, then make controls
 
-Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`: the poster, the unevenness, one material, the headline as a shape. Build that composition from the primitives in `references/layout.md` (stack, cluster, split, frame, rows). Type and space create the hierarchy. Color confirms it. A component exists only where a behavior exists. Every control you ship has the states in `references/components.md`.
+Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`.
 
 ### 4. Write the words
 

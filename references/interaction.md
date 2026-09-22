@@ -9,9 +9,14 @@ The control's anatomy is in `components.md`. This file is how it behaves in time
 - A drawer, if you truly need one, uses `--dur-3`.
 - Exit is faster than enter. Use `--dur-1` and `--ease-in`.
 - If work can take longer than about 300ms, the control shows a pending verb immediately.
-- Do not animate the height of the page. Do not animate section reveals on scroll. Do not stagger a list.
+- Do not animate the height of the page, and do not animate `width`, `height`, `top`, or `left`. Animate opacity and transform. Those stay smooth.
+- Duration follows distance. A few pixels is `--dur-1` or `--dur-2`. Something that crosses a large part of the screen is `--dur-3`. Nothing takes longer than `--dur-3` except a skeleton pulse.
+- Enter with `--ease-out` (it arrives and settles). Leave with `--ease-in` (it accelerates away). Exit is shorter than enter.
+- Do not animate section reveals on scroll. Do not animate the page in on first load.
+- Do not stagger a list. Play may stagger at most five items, 30ms apart, and only on that one entrance.
+- If an object continues from one view to the next (a thumbnail that becomes the picture), keep it continuous. Do not crossfade two unrelated screens and call it a transition.
 
-Play may put `cubic-bezier(0.2, 1.4, 0.4, 1)` on one element. That curve is not a token, and it is not reused.
+Play may put `cubic-bezier(0.2, 1.4, 0.4, 1)` on one element. That curve is not a token, and it is not reused. The press state is a color change in `:active`, not a scale.
 
 `prefers-reduced-motion` is handled in `base.css`. Do not add a second animation that ignores it.
 

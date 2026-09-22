@@ -30,6 +30,12 @@ Then ask for the interface, or run `/d-pill`.
 |---|---|
 | `SKILL.md` | The procedure, the laws, what to read |
 | `references/sense.md` | How to see a page: proportion, material, the headline, what to leave out |
+| `references/type.md` | How type is set: pairing, leading, rag, figures, emphasis |
+| `references/color.md` | How color is judged: value, temperature, dark themes, brand hex |
+| `references/geometry.md` | Optical alignment, radius, bleed, crops, scanning |
+| `references/details.md` | Hairlines, focus, press, truncation, skeletons, z-order |
+| `references/behavior.md` | How people move: distance, choice, scent, trust, speed |
+| `references/narrative.md` | How a site argues, and how its pictures behave |
 | `references/direction.md` | The ten directions and their overrides |
 | `references/foundations.md` | How to edit tokens without breaking them |
 | `references/base.css` | The tokens and the classes |
