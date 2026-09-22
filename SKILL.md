@@ -36,17 +36,19 @@ If nothing has been chosen, the unset look is not a design. Commit a direction. 
 
 ## What to read
 
-Always read this file, `references/sense.md`, `references/taste.md`, and `references/direction.md` before drawing. Read `references/critique.md` before you call the UI done.
+Always read this file, `references/sense.md`, `references/taste.md`, and `references/direction.md` before drawing. If they name a style, a period, a movement, or a material, read `references/styles.md` before the direction tree. Read `references/critique.md` before you call the UI done.
 
 Then only what the work touches:
 
 | Work | Read |
 |---|---|
-| Any surface a person will see | `references/taste.md`, `references/craft.md`, `references/type.md`, `references/geometry.md`, `references/details.md` |
+| Any surface a person will see | `references/taste.md`, `references/craft.md`, `references/type.md`, `references/proportion.md`, `references/geometry.md`, `references/details.md` |
+| A named style, period, movement, or material | `references/styles.md`, then `references/faces.md`, `references/grids.md`, and `references/harmony.md` |
 | Color, theme, dark mode, a brand hex | `references/color.md`, then `references/foundations.md` |
 | Tokens, CSS, a new page file | `references/foundations.md` and `references/base.css` |
 | Page structure, navigation, breakpoints, which container | `references/layout.md`, `references/arrange.md`, and `references/behavior.md` |
 | A control, menu, dialog, table, form, or state | `references/components.md` and `references/details.md` |
+| Master-detail, filters, pagination, calendar, command palette, consent | `references/patterns.md` |
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
 | A landing page, a story, pricing, proof, photography | `references/narrative.md`, `references/art.md`, and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
@@ -70,7 +72,7 @@ One sentence: who is here, what they do on this surface, what done feels like. I
 
 ### 2. Commit a direction
 
-Pick one direction from `references/direction.md` with the decision tree there. The only legal mix is one borrowed slot, written as an exception. State the commitment before code, in the work and in the reply:
+If they named a style, commit it from `references/styles.md` and start from the direction that style names. Otherwise pick one direction from `references/direction.md` with the decision tree there. The only legal mix is one borrowed slot, written as an exception. State the commitment before code, in the work and in the reply:
 
 ```
 Job: A baker marks today's orders out.

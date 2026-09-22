@@ -42,7 +42,7 @@ Claude and other skill runners use the same folder. The procedure is `SKILL.md`.
 ## What the agent does
 
 1. Names the job in one sentence. Who is here, what they do, what done feels like.
-2. Commits to one of ten directions and writes down what it is refusing.
+2. Commits to a named style if they gave one, otherwise to one of ten directions, and writes down what it is refusing.
 3. Composes the page as a poster: uneven on purpose, one material, the headline set by hand.
 4. Builds it from the tokens and classes in `references/base.css`, in whatever stack the repo already has.
 5. Runs the critique at a wide window and at 390px. A fail gets fixed before the work is called done.
@@ -50,6 +50,8 @@ Claude and other skill runners use the same folder. The procedure is `SKILL.md`.
 Text has to clear 4.5:1. Control edges and the focus ring have to clear 3:1. The default palette was checked with `scripts/contrast.py` before it shipped. A color outside the safe band gets checked again.
 
 ## Directions
+
+The ten directions are the starting points. A named style (Swiss, Didone, a zine, a label, a terminal, a poster) is a harder commitment, in `references/styles.md`. The agent does not sand that request down into a generic app.
 
 | Direction | For |
 |---|---|
@@ -75,6 +77,12 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `SKILL.md` | Procedure, laws, what to read |
 | `references/sense.md` | Seeing: proportion, material, the headline, what to leave out |
 | `references/taste.md` | The judgment: effort hidden, one weather, finish |
+| `references/styles.md` | The styles: book, poster, object, screen, and the memes done properly |
+| `references/faces.md` | How to judge a typeface and which class it is |
+| `references/grids.md` | Manuscript, column, modular, and hierarchical grids |
+| `references/harmony.md` | How hues relate: mono, analogous, complement, spectrum |
+| `references/proportion.md` | Size relationships, rhythm, the first screen |
+| `references/patterns.md` | Master-detail, filters, pagination, calendar, consent |
 | `references/type.md` | Setting type: pairing, leading, rag, figures |
 | `references/color.md` | Judging color: value, temperature, dark themes |
 | `references/geometry.md` | Optical alignment, radius, bleed, crops |

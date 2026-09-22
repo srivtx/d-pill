@@ -19,6 +19,8 @@ Density words (compact, regular, generous) are defined in `layout.md`. Token edi
 
 A brand that already has type and color skips the tree. Map that brand onto the slots and keep going.
 
+If they name a style, a decade, a material, or a kind of object, do not stop at this tree. Commit the style in `styles.md`.
+
 ## The only legal mix
 
 Borrow one slot from a second direction and write it in the commitment. "Spec, with Soft's hue 25." Do not borrow three. Contrast floors still hold.

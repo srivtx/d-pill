@@ -8,7 +8,7 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 
 ## Direction
 
-- The committed direction is visible in the type, the color, and the radius.
+- The committed direction, or the named style in `styles.md`, is visible in the type, the color, and the radius. A named style was not sanded back into a generic app.
 - The refusal list in `craft.md` is honored, or a real brand explicitly overrides a specific item.
 - One accent. Status colors are only on status.
 - One material, as named in the commitment. Nothing on the page belongs to a second material (a shadow on paper, a glow on a tool, glass on a document).
