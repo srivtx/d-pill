@@ -106,11 +106,13 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `references/base.css` | The tokens and the classes |
 | `references/layout.md` | Primitives, density, breakpoints |
 | `references/components.md` | Controls, overlays, anatomy |
-| `references/interaction.md` | Time, forms, failure, motion |
+| `references/interaction.md` | Time, forms, failure, motion, the craft exception |
+| `references/soft.md` | The craft site: soft surfaces, status strip, pixel accents, its motion and override |
 | `references/craft.md` | The visual tells and the fix for each |
 | `references/surfaces.md` | App, marketing, dashboard, docs, auth |
 | `references/writing.md` | Words on the interface |
 | `references/critique.md` | The gate |
+| `references/reading.md` | The sources behind the judgments |
 | `scripts/contrast.py` | Contrast for a custom OKLCH pair |
 | `assets/mark.svg` | The mark |
 

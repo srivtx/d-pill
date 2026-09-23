@@ -34,8 +34,64 @@ If the idea has no common metaphor, use a word. An icon that needs a tooltip to 
 
 Do not put an icon in a colored circle to make a feature list. The drawing is enough, in `--ink` or `--ink-muted`.
 
+The catalog, so a set never argues with itself. Draw each one the same way every time:
+
+| Act | Picture | Notes |
+|---|---|---|
+| Search | magnifier | handle at 45°, lens open, 2px gap between lens and handle |
+| Close | × | two strokes crossing at center, not a letter x |
+| Menu | three lines | equal weight, equal gap; or the word Menu |
+| Settings | sliders | three horizontal lines with offset knobs, beats a gear |
+| Trash | bin | body, lid, two lines on the front; no flying papers |
+| Play | triangle | pointing right, optically nudged toward center-right |
+| Pause | two bars | equal width, centered as a pair |
+| External | box, arrow out | arrow leaves the top-right corner at 45° |
+| Copy | two offset rectangles | the back one partial, dashed optional |
+| Check | one stroke | from lower-left to upper-right, then across |
+| Sun | circle, rays | circle plus 8 short rays at even gaps |
+| Moon | crescent | one circle minus a bite; no face |
+| Plus / minus | single strokes | full-width arms, centered |
+| Chevron | one angle | 90° or softer, thick enough to read at 16px |
+| Sort | three bars | descending width or arrows on a stack |
+| Filter | funnel | wide mouth, narrow stem, open bottom |
+| Bell | bell | one stroke outline, a clapper dot optional |
+| Star | five points | overshoot the live area like any triangle |
+| Heart | heart | symmetric, one stroke, no shine dot |
+| Refresh | circular arrow | one arc with an arrowhead chasing its own tail |
+| Download | tray, arrow in | arrow meets a line, the line is the tray |
+| Info | circle, i | the dot and the stem, both centered |
+
 ## Files
 
 Inline SVG, `currentColor`, `aria-hidden="true"` when a label is next to it. No fixed fill in the file. No extra whitespace in the viewBox. A set shares one viewBox, so swapping an icon does not move the label.
 
 If the project already has a set, draw new icons into that set. Do not import a second pack for three missing pictures.
+
+## Pixel icons
+
+A second, separate way of drawing, for when the style asked for it: Play, a terminal, or Soft editorial's one pixel object (`soft.md`). It is a whole set or nothing — one pixel icon inside a stroked set is the same fall as one filled icon.
+
+- Draw on a 12 or 16 grid. Every stroke is whole pixels: 1px at 16, 1px at 12. No half pixels, no anti-aliasing, no curves that are not staircases.
+- The palette is 4 colors or fewer plus transparent, picked from the page's hue. One of them is `--ink`.
+- Ship at 16, 24, 32 — whole multiples only, nearest-neighbor scaling. Any other size shatters the pixels.
+- Inline SVG, one `rect` per pixel (or `shape-rendering: crispEdges` on paths), `currentColor` for the ink. `aria-hidden` as above.
+- The metaphor table still holds. A pixel magnifier is still a magnifier; it is drawn on the grid, not restyled.
+- Pixel is an accent material. One object per surface — a banner or a tile — never the icon set of a serious tool.
+
+## Glyph tiles
+
+The mark for a thing with no mark: a repo, a side project, an org with no logo. Used by Soft editorial's status cards and build lists.
+
+- The tile: a tone gradient, two steps of one hue at low chroma, light theme pastel and dark theme the real hue. Same hue family as the page, not a rainbow.
+- The glyph: a simple drawn mark in `currentColor`, centered in the 20px live area of the tile's box — a node graph, a radar, a key, whatever the thing actually is. Two strokes maximum of complexity. It is a monogram, not an illustration.
+- The glyph must flip with the theme: dark ink on the pastel step in light, paper ink on the saturated step in dark. If the tile cannot carry both, the chroma is too high.
+- Never a colored circle with an initial. Never a letter where a drawing would do. The tile is earned by the glyph, not the gradient.
+
+## States
+
+An icon that reports a state may animate the state — and only the state:
+
+- Play and pause swap, once, at `--dur-1`. Two drawings crossfading, not one shape morphing. A morph is a performance; a swap is a fact.
+- Equalizer bars run while audio actually runs, and pause with it (`soft.md` carries the keyframes). Bars that keep dancing on a paused player are lying.
+- A spinner exists only while work is pending. It is a clock, not a decoration.
+- Nothing else moves. Icons do not animate on hover; the label changes color, the icon stays still.

@@ -50,6 +50,7 @@ Then only what the work touches:
 | A control, menu, dialog, table, form, or state | `references/components.md` and `references/details.md` |
 | Master-detail, filters, pagination, calendar, command palette, consent | `references/patterns.md` |
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
+| Soft cards, a status strip, a personal site or portfolio with the craft look | `references/soft.md`, then `references/formats.md` |
 | A landing page, a story, pricing, proof, photography | `references/narrative.md`, `references/art.md`, and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
 | A shop, a product, a bag, checkout | `references/commerce.md` |
@@ -57,11 +58,12 @@ Then only what the work touches:
 | Another language, RTL, long labels, locale punctuation | `references/world.md` and `references/type.md` |
 | A chart, a table of numbers, a diagram, a timeline | `references/dataviz.md` and `references/information.md` |
 | A logo, a favicon, a wordmark, brand rules | `references/brand.md` |
-| Drawing icons | `references/icons.md` |
+| Drawing icons, pixel icons, glyph tiles, icon states | `references/icons.md` |
 | A phone layout | `references/mobile.md` |
 | Access, zoom, screen readers, motion sensitivity | `references/a11y.md`, then the floors in `references/critique.md` |
 | Adding a token or a component to a system | `references/systems.md` |
 | Labels, errors, empty copy, headlines | `references/writing.md` and `references/type.md` |
+| The source behind a judgment, further reading | `references/reading.md` |
 | A color outside the safe band | `scripts/contrast.py`, then the band in `references/foundations.md` |
 
 ## Procedure

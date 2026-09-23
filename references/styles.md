@@ -328,6 +328,16 @@ Start from Soft service.
 - Material: paper, a rounded object, daylight.
 - Refuse: a squircle on every div, a mascot, baby colors, an illustration of people hugging a phone.
 
+### Soft editorial
+Start from Editorial, or Atelier when it is a portfolio. The craft site: quiet, personal, precise. The full recipe, the status strip, and the override are in `soft.md`.
+- Type: a grotesk with personality for the page (Space Grotesk, Bricolage Grotesque), a display serif with a true italic for the one quote and at most one heading (Instrument Serif), mono for facts.
+- Color: the base neutrals. One scarce accent. A dark pixel banner may hold the one serif italic quote, contrast-checked.
+- Shape: radius 12–16 on cards. The soft surface: hairline border and soft shadow together, the one written exception to the chrome law.
+- Space: regular. A status strip of two or three small cards under the headline, equal heights.
+- Motion: the craft exception in `interaction.md` — reveal once, media zoom, live glyphs, the theme wipe.
+- Material: a desk, a journal, a machine that is on.
+- Refuse: same-gray dents, text in the shadow, focus by shadow, glass and soft on one page, a mascot per section, pixel art as the whole material.
+
 ### Maximal campaign
 Start from Play or Editorial.
 - Type: one display face at extreme scale, one text face. The campaign line is the page.
@@ -363,7 +373,7 @@ These are the styles people request by their meme name. The crude version is why
 A panel may be translucent only when there is something real behind it (a photograph, a map) and the text still clears 4.5 against the worst frame of that background. Add a solid fallback. One panel, not a page of frosted cards. Border is a hairline, not a white glow. Blur is slight. If you cannot guarantee contrast, do not use glass. Use a solid `--surface`.
 
 ### Neumorphism
-Do not. A soft dent and a soft bump in the same gray fails contrast, fails focus, and dates the page in a season. If they insist: one raised surface, a visible border as well as the shadow, text at the ink color not the shadow color, and a focus ring that does not depend on the shadow. Prefer Flat.
+The 2019 meaning — extruded dents in the same gray, no borders, text in the shadow color — is refused: it fails contrast, fails focus, and dates the page in a season. When people point at a site they like and say this word, they almost always mean Soft editorial, above, with its border-and-shadow correction in `soft.md`. Commit that. If they truly want the dent: one raised surface, a visible border as well as the shadow, text at `--ink`, and a focus ring that does not depend on either. Prefer Flat.
 
 ### Chrome and Y2K
 Start from Play. One metallic object (the hero mark, a single frame), not a page of bevels. Type stays flat and readable. Highlights are a gradient on that one object, the way the capsule has a gloss. The rest of the page is flat. Refuse: lens flare, starfields, beveled navigation, unreadable metallic body text.
@@ -386,6 +396,8 @@ Random fonts, marquee tags, and a shaking button are not the brutalist style abo
 | Editorial, magazine | Magazine cover or Swiss poster or Editorial. |
 | Tech, developer, dark | Dense terminal or Signal. |
 | Friendly, human | Soft product. Not a mascot. |
+| Soft, tactile, cozy, craft | Soft editorial. Not the dent. |
+| Personal site, portfolio with warmth | Soft editorial from Atelier. |
 | Bold, wild, fun | Play, Memphis, or Maximal campaign. One of them. |
 | Old, classic, book | Old style or Rational. |
 | Fashion | Didone or Lookbook. |

@@ -18,6 +18,8 @@ The control's anatomy is in `components.md`. This file is how it behaves in time
 
 Play may put `cubic-bezier(0.2, 1.4, 0.4, 1)` on one element. That curve is not a token, and it is not reused. The press state is a color change in `:active`, not a scale.
 
+The one broad exception is the craft exception, and it belongs to Soft editorial (`soft.md`), committed by name. It buys: section reveals on scroll, once per element, opacity and 8px of translate only, `--dur-3`; a stagger of at most five siblings, 30–60ms apart, that one entrance; media zoom to `scale(1.05)` under an overflow clip; a glyph that animates the state of a running machine (equalizer bars that pause with the audio); one marquee strip, pausable; and a View Transitions wipe for the theme flip, ~450ms, with an instant-swap fallback. Everything else in this file still holds. The recipes and the code are in `soft.md`.
+
 `prefers-reduced-motion` is handled in `base.css`. Do not add a second animation that ignores it.
 
 ## Focus
