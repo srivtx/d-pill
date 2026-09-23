@@ -60,6 +60,13 @@ The catalog, so a set never argues with itself. Draw each one the same way every
 | Refresh | circular arrow | one arc with an arrowhead chasing its own tail |
 | Download | tray, arrow in | arrow meets a line, the line is the tray |
 | Info | circle, i | the dot and the stem, both centered |
+| Users | two heads | front head full, the back one cropped by it; no faces, no bodies |
+| Book | open cover, flat spine | the repo and the paper metaphor; the count lives in the mono label, not the drawing |
+| Pin | map pin, dot | teardrop outline with a centered dot; the dot is the point |
+| Clock | circle, two hands | 12 is up; hands never overlap past readability at 16px |
+| Link | two chain halves | each half one stroke, angled to meet; broken link = one half and a gap |
+| Brackets | two angles | the pair faces the other across the word; code, and nothing else |
+| Location arrow | paper plane | one fold line, nose points where the thing goes |
 
 ## Files
 

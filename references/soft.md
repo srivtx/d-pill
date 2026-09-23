@@ -48,6 +48,9 @@ These are the craft exception's allowances, from `interaction.md`. What they buy
 - A machine that runs may animate its own glyph: equalizer bars while audio plays. It stops when the thing stops, because it is a state, not a decoration.
 - One marquee strip, 30–70s, pause on hover. A second marquee is a costume.
 - One mascot, at most 40px, on the bottom edge, out of the flow, never over a target. It is Play borrowed for the last 40 pixels of the page.
+- An inline text link may grow an underline on hover: one 1px `currentColor` line drawn from the middle outward (`background-size`, no extra element), `--dur-1`. Pick one hover answer per link — a row that already answers with color does not also get the underline. Headings and buttons never carry it.
+- A 2px reading-progress hairline at the top edge may track the scroll through the CSS scroll-driven animations module: `animation-timeline: scroll()`, `@supports`-gated, no script, hidden where unsupported and under `prefers-reduced-motion`. It is a ruler, not a performance.
+- One control row may magnetize: each control leans toward the pointer a few pixels on springs (stiffness ~350, damping ~28, pull ≤ 6px) and releases home on leave. Fine pointers only — nothing happens on touch — and it is off under `prefers-reduced-motion`. Controls only: never rows, never text, never cards. One row per page.
 
 ## Pixel art and glyph tiles
 
@@ -57,7 +60,7 @@ A repo, an org, or a side project with no mark gets a glyph tile, not a colored 
 
 ## Refuse
 
-Same-gray dents, text in the shadow color, focus by shadow, a squircle on every div, glass and soft on the same page, three stat cards where one sentence would do, a marquee per section, animation on page load, a mascot per section, pixel art as the whole material.
+Same-gray dents, text in the shadow color, focus by shadow, a squircle on every div, glass and soft on the same page, three stat cards where one sentence would do, a marquee per section, animation on page load, a mascot per section, pixel art as the whole material, an underline on a heading, a progress hairline on a three-screen page, a magnetized card, a second magnetized row.
 
 ## The override
 
@@ -157,6 +160,46 @@ html[data-theme="dark"] {
 .marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: marquee 48s linear infinite; }
 .marquee:hover ul { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
+
+/* inline links grow an underline from the middle — one hover answer */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px, 0% 1px;
+  background-position: left bottom, right bottom;
+  background-repeat: no-repeat;
+  padding-bottom: 1px;
+  transition: background-size var(--dur-1) var(--ease-out);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 50% 1px, 50% 1px;
+}
+
+/* reading-progress hairline — scroll-driven, no script, no support = no bar */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--ink);
+  opacity: 0.3;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+  z-index: 60;
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    animation: progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+}
 ```
 
 The theme flip is four lines of script, not CSS:
@@ -169,6 +212,22 @@ const flip = (root, next, x, y) => {
     { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
     { duration: 450, easing: "ease-in", pseudoElement: "::view-transition-new(root)" }
   ));
+};
+```
+
+The magnetized control row is a few more. Give the control `transition: transform var(--dur-1) var(--ease-out)` so the follow eases; springs if the stack has them:
+
+```js
+const magnet = (el, pull = 4) => {
+  if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  el.addEventListener("pointermove", (e) => {
+    const r = el.getBoundingClientRect();
+    el.style.transform =
+      `translate(${(e.clientX - r.left - r.width / 2) / r.width * pull}px,` +
+      ` ${(e.clientY - r.top - r.height / 2) / r.height * pull}px)`;
+  });
+  el.addEventListener("pointerleave", () => { el.style.transform = ""; });
 };
 ```
 

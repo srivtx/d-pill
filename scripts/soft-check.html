@@ -81,15 +81,60 @@ html[data-theme="dark"] {
 .marquee:hover ul { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
+/* inline links grow an underline from the middle — one hover answer */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px, 0% 1px;
+  background-position: left bottom, right bottom;
+  background-repeat: no-repeat;
+  padding-bottom: 1px;
+  transition: background-size var(--dur-1) var(--ease-out);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 50% 1px, 50% 1px;
+}
+
+/* reading-progress hairline — scroll-driven, no script, no support = no bar */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--ink);
+  opacity: 0.3;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+  z-index: 60;
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    animation: progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+}
+
 /* ===== demo page wiring ===== */
 .banner { background: oklch(0.25 0.04 250); color: oklch(0.95 0.01 250); padding: var(--space-7) var(--space-5); }
 .demo { max-width: 46rem; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-9); }
 label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
 .glyph { width: 4rem; height: 4rem; display: grid; place-items: center; background: linear-gradient(135deg, oklch(0.93 0.03 215), oklch(0.88 0.05 215)); color: oklch(0.3 0.03 215); }
 html[data-theme="dark"] .glyph { background: linear-gradient(135deg, oklch(0.4 0.07 215), oklch(0.3 0.06 215)); color: oklch(0.95 0.01 215); }
+/* the magnetized control row: the controls carry the transition so the follow eases */
+.magnet-row { display: flex; gap: var(--space-2); align-items: center; }
+.magnet { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: var(--border); border-radius: var(--radius); background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px oklch(0.25 0.02 var(--hue) / 0.05); transition: transform var(--dur-1) var(--ease-out); }
+.tall { height: 140vh; display: grid; align-content: start; }
 </style>
 </head>
 <body>
+<div class="scroll-progress" aria-hidden="true"></div>
 <a class="skip" href="#main">skip</a>
 <div class="banner">
   <div class="demo">
@@ -130,10 +175,48 @@ html[data-theme="dark"] .glyph { background: linear-gradient(135deg, oklch(0.4 0
       <button>focus me</button>
     </div>
   </div>
+  <hr class="rule-dashed" style="margin-block:var(--space-6)">
+  <p><label>link detail</label></p>
+  <p style="margin-top:var(--space-2)">The inline link <a class="link-underline" href="#main" style="color:inherit">draws an underline from the middle</a> on hover and focus. One answer per link: this is the one.</p>
+  <hr class="rule-dashed" style="margin-block:var(--space-6)">
+  <p><label>magnetized control row</label></p>
+  <div class="magnet-row" style="margin-top:var(--space-3)">
+    <button class="magnet" aria-label="star">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.4l6-.9L12 3z"/></svg>
+    </button>
+    <button class="magnet" aria-label="pin">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="1.5"/></svg>
+    </button>
+    <button class="magnet" aria-label="users">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 5.2a3.5 3.5 0 0 1 0 5.6"/><path d="M17.5 15.5c2 .8 3 2.3 3 4.5"/></svg>
+    </button>
+    <button class="magnet" aria-label="link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5l5-5"/><path d="M7 12l-2 2a3.5 3.5 0 0 0 5 5l2-2"/><path d="M17 12l2-2a3.5 3.5 0 0 0-5-5l-2 2"/></svg>
+    </button>
+  </div>
+  <p class="quiet" style="margin-top:var(--space-2)">Leans toward a fine pointer, releases home on leave. Off on touch, off under reduced motion.</p>
+  <hr class="rule-dashed" style="margin-block:var(--space-6)">
+  <div class="tall">
+    <p><label>reading progress</label></p>
+    <p class="quiet">Scroll. The 2px hairline at the top edge tracks position through the scroll-driven animations module — no script where it is supported, no bar where it is not.</p>
+  </div>
   <script>document.documentElement.classList.add('js');
     const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.2 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     setTimeout(() => document.querySelector('.eq').setAttribute('data-idle',''), 2600);
+    /* the magnetized row — soft.md's script, verbatim */
+    const magnet = (el, pull = 4) => {
+      if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.transform =
+          `translate(${(e.clientX - r.left - r.width / 2) / r.width * pull}px,` +
+          ` ${(e.clientY - r.top - r.height / 2) / r.height * pull}px)`;
+      });
+      el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+    };
+    document.querySelectorAll('.magnet').forEach(el => magnet(el));
   </script>
 </main>
 </body>
