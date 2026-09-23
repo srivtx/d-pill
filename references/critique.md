@@ -56,6 +56,18 @@ The safe band for token lightness is in `foundations.md`. The ratios below are t
 - The action sits on the object it changes. One primary per region (`behavior.md`).
 - A selling page argues in the order in `narrative.md`. Proof is real or absent. The first and last actions share a destination.
 
+## AI surfaces
+
+For a chat, copilot, or agent surface; the rules are in `ai-interfaces.md`. Fire the stream and the tools before judging.
+
+- The view pins only while the person is at the bottom. Scroll up during a stream: the pin releases, and a "Jump to latest" affordance appears when content lands below.
+- Nothing below a streaming block moves between two frames. Fire the stream and watch the button row and the composer.
+- The stop control is reachable while streaming. Stopping keeps the partial answer and says "Stopped," styled quiet, not as an error.
+- The stream writes at the frame budget, not per token. The caret is a 1px block, not a spinner.
+- Every citation marker resolves, is numbered, and opens the cited source. No marker the model did not produce.
+- An approval card names the object and the verb. Anything destructive or external waits for the person.
+- No tool-call theater: rendered steps all ran. No fake typing delay on a finished answer. One mark for the model's presence, not sparkles on every heading.
+
 ## Writing
 
 - No word from the ban list in `writing.md`, unless it is the product's actual name.

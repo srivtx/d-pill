@@ -338,6 +338,16 @@ Start from Editorial, or Atelier when it is a portfolio. The craft site: quiet, 
 - Material: a desk, a journal, a machine that is on.
 - Refuse: same-gray dents, text in the shadow, focus by shadow, glass and soft on one page, a mascot per section, pixel art as the whole material.
 
+### Agent console
+Start from Spec, or Dense terminal when it is dark. A surface where a person talks to a model or supervises an agent. The full anatomy, message states, streaming laws, and approval patterns are in `ai-interfaces.md`.
+- Type: the direction's sans and its mono. The transcript is body size. Meta (model, cost, context left) is `.quiet` `.mono` at one edge.
+- Color: light or dark. One accent for the person's actions and the send control. Status colors only for tool-call states.
+- Shape: the direction's small radius. The transcript is a document, not bubbles: author-side for the person, full-width `--surface` or plain for the machine.
+- Space: compact. Composer at the bottom edge, transcript above, one conversation per view. A conversations sidebar is desktop only and it is a list.
+- Motion: the craft exception does not apply by default — a stream is motion enough. Enter and exit follow `interaction.md`; the streaming laws are in `ai-interfaces.md`.
+- Material: a console, a workbench with a machine on it.
+- Refuse: bubble alternation for person and machine, a mascot, sparkles on every heading, chrome between turns, a spinner where streaming text would be.
+
 ### Maximal campaign
 Start from Play or Editorial.
 - Type: one display face at extreme scale, one text face. The campaign line is the page.
@@ -408,3 +418,6 @@ Random fonts, marquee tags, and a shaking button are not the brutalist style abo
 | Trippy, psychedelic | Psychedelic poster. Read the refuse line. |
 | Swiss, minimal, grid | Swiss. |
 | Brutal, raw, ugly-on-purpose | Brutalist web, not the meme. |
+| AI-native, agentic, a copilot, "like ChatGPT" | Agent console above; the rules in `ai-interfaces.md`. |
+| "Like Linear," dense, dark, keyboard-first | Spec or Dense terminal, gated by Dense dark tools in `frontier.md`. |
+| Trend words: glassy, aurora, barely-there, anti-grid, shaders, expressive type | The gates in `frontier.md` first, then the matching entry above. |

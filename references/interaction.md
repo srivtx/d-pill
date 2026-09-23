@@ -48,6 +48,14 @@ If the action is reversible for a few seconds and it only affects the actor's ow
 
 If it is not reversible, or it destroys other people's work, use the confirm dialog in `components.md`. The title names the object. The button repeats the verb and the object. "Delete project", not "Yes" and not "OK".
 
+## Streaming
+
+A surface that grows while the person watches follows three laws. The full set, the message states, and the approval patterns are in `ai-interfaces.md`.
+
+- Pin the view to the bottom only while the person is at the bottom. Scrolling up releases the pin and offers "Jump to latest."
+- Reserve the space a growing block will take (`min-height`, an aspect ratio on media). Nothing below a stream moves.
+- Write the DOM at the frame budget — a rAF or a 30–60ms batch — not per token. The stream can outrun the screen; the screen is the contract.
+
 ## Optimistic updates
 
 Use them for a reversible toggle: star, complete, pin. Paint the new state immediately. If the request fails, paint the old state back and show the error. Do not optimistic-delete without the undo toast.
@@ -67,6 +75,14 @@ Every view that shows a collection or a record specifies all five. Do not design
 Stale data that is still safe to read is one quiet line: "Updated 3 hours ago." Stale data that is unsafe to act on is a `.banner` that names the consequence and offers a retry.
 
 Offline copy tells the truth about what you actually built. "You're offline. Changes stay on this device until you reconnect." is allowed only when that queue exists. Otherwise: "You're offline. This page may be out of date."
+
+## Libraries
+
+- CSS first. Two animated properties or fewer, no library.
+- A React build uses Motion for springs — the one magnetized control row in `soft.md`, fine pointer only. It is not a general animation budget.
+- GSAP has been fully free since 2025 (Webflow). It earns its place for one orchestrated sequence, not for hovers and reveals. A timeline library is for timelines.
+- Native CSS took scroll-driven animations, view transitions, popover, and anchor positioning to baseline — use them before a positioning or reveal library. The gates are in `frontier.md`, Native-CSS frontier.
+- The durations, the easings, and the refusals in this file are the law regardless of engine. A library being free is not a reason.
 
 ## Motion and meaning
 

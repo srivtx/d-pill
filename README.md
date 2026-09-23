@@ -12,6 +12,7 @@
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-1a1814?style=flat-square"></a>
   <img alt="Skill format" src="https://img.shields.io/badge/format-SKILL.md-1a1814?style=flat-square">
   <img alt="Ten directions" src="https://img.shields.io/badge/directions-10-1a1814?style=flat-square">
+  <img alt="Machine-readable tokens" src="https://img.shields.io/badge/tokens-machine--readable-1a1814?style=flat-square">
   <img alt="Contrast floors checked" src="https://img.shields.io/badge/contrast-checked-c4552a?style=flat-square">
 </p>
 
@@ -48,6 +49,14 @@ Claude and other skill runners use the same folder. The procedure is `SKILL.md`.
 5. Runs the critique at a wide window and at 390px. A fail gets fixed before the work is called done.
 
 Text has to clear 4.5:1. Control edges and the focus ring have to clear 3:1. The default palette was checked with `scripts/contrast.py` before it shipped. A color outside the safe band gets checked again.
+
+## What it covers now
+
+Interfaces a person uses, and the new frontier: chat surfaces, copilots, agent consoles, streaming answers, tool-call and approval UI, and generative UI — the rules are in `references/ai-interfaces.md`, gated by `references/critique.md`.
+
+The 2025–26 moves — barely-there chrome, anti-grid structure, expressive letters, shader heroes, dense dark tools, adaptive pages — are catalogued with entry gates in `references/frontier.md`. A trend that cannot write its own commitment paragraph is a vibe.
+
+And the system is machine-readable: `references/tokens.json` is the verified export of `base.css` (run `python3 scripts/check-tokens.py` — 85 values, both themes), and `references/machines.md` is how pipelines and coding agents consume the values and the rules without inventing parallel token names.
 
 ## Directions
 
@@ -106,14 +115,19 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `references/base.css` | The tokens and the classes |
 | `references/layout.md` | Primitives, density, breakpoints |
 | `references/components.md` | Controls, overlays, anatomy |
-| `references/interaction.md` | Time, forms, failure, motion, the craft exception |
+| `references/interaction.md` | Time, forms, failure, motion, streaming, libraries, the craft exception |
 | `references/soft.md` | The craft site: soft surfaces, status strip, pixel accents, its motion and override |
+| `references/ai-interfaces.md` | Chat, copilots, agent actions, streaming stability, approvals, generative UI |
+| `references/machines.md` | The machine contract: rules agents can follow, verification, the export |
+| `references/tokens.json` | The machine-readable token export, verified against `base.css` |
+| `references/frontier.md` | The 2025–26 moves, each with a gate and a refuse list |
 | `references/craft.md` | The visual tells and the fix for each |
 | `references/surfaces.md` | App, marketing, dashboard, docs, auth |
 | `references/writing.md` | Words on the interface |
 | `references/critique.md` | The gate |
 | `references/reading.md` | The sources behind the judgments |
 | `scripts/contrast.py` | Contrast for a custom OKLCH pair |
+| `scripts/check-tokens.py` | Verifies `tokens.json` against `base.css` |
 | `assets/mark.svg` | The mark |
 
 ## Use the stylesheet

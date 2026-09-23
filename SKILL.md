@@ -5,15 +5,20 @@ description: >
   visual direction, then type, color, layout, components, motion, and interface
   writing, then pass a critique gate before the UI is called done. Use for
   landing pages, marketing sites, app screens, dashboards, settings, auth,
-  docs, pricing, design tokens, and visual redesigns. Use when the user runs
-  /d-pill, asks for a design system, says "make it look good", "make this
+  docs, pricing, design tokens, and visual redesigns. Use for AI-native
+  surfaces: chat interfaces, copilots, agent consoles, streaming responses,
+  tool-call and approval UI, citations, and generative UI. Use when the user
+  runs /d-pill, asks for a design system, says "make it look good", "make this
   beautiful", "flawless UI", or asks you to design, restyle, or build a page,
   screen, site, or component.
 when-to-use: >
   Any website or web-app interface: a page, screen, component, theme, or
-  redesign. /d-pill.
+  redesign. Chat, copilot, and agent surfaces. Machine-readable design tokens.
+  /d-pill.
+license: MIT
 metadata:
   short-description: Interfaces that look decided
+  version: "1.4"
 ---
 
 # d-pill
@@ -50,6 +55,9 @@ Then only what the work touches:
 | A control, menu, dialog, table, form, or state | `references/components.md` and `references/details.md` |
 | Master-detail, filters, pagination, calendar, command palette, consent | `references/patterns.md` |
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
+| A chat surface, a copilot, an agent's actions, streaming text, citations, approvals, generative UI | `references/ai-interfaces.md` |
+| Machine-readable tokens, feeding this system to another tool, verifying the export | `references/machines.md` and `references/tokens.json` |
+| A named frontier move: barely-there, anti-grid, shader hero, expressive letters, dense dark tools, adaptive pages | `references/frontier.md` |
 | Soft cards, a status strip, a personal site or portfolio with the craft look | `references/soft.md`, then `references/formats.md` |
 | A landing page, a story, pricing, proof, photography | `references/narrative.md`, `references/art.md`, and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
@@ -87,7 +95,7 @@ Refuse: hero, cards, a second accent, illustration.
 
 ### 3. Set tokens, then compose, then make controls
 
-Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`, after `references/arrange.md` picks the container. Pictures follow `references/art.md`. Another language follows `references/world.md`. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`. A shop follows `references/commerce.md`. A phone layout follows `references/mobile.md`. A mark follows `references/brand.md`. Access is designed with `references/a11y.md`, not checked afterwards.
+Copy `references/base.css`. Paste the direction's override after it. Compose with `references/sense.md`, then set the type with `references/type.md`, the color with `references/color.md`, and the edges with `references/geometry.md`. Build that composition from the primitives in `references/layout.md`, after `references/arrange.md` picks the container. Pictures follow `references/art.md`. Another language follows `references/world.md`. A conversation with a model or an agent's actions follow `references/ai-interfaces.md`, over the committed direction. A component exists only where a behavior exists. Ship the states in `references/components.md` and the pixel decisions in `references/details.md`. A page that has to be believed also follows `references/narrative.md`. A page a person operates also follows `references/behavior.md`. A shop follows `references/commerce.md`. A phone layout follows `references/mobile.md`. A mark follows `references/brand.md`. A frontier move asked for by name follows `references/frontier.md` before it is committed. Access is designed with `references/a11y.md`, not checked afterwards.
 
 ### 4. Write the words
 
@@ -114,6 +122,16 @@ In the reply, name the direction and one sentence on what the critique changed. 
 - The second typeface has to change the voice. If it does not, use one family.
 - Invent composition. Do not invent a new checkbox, a new dialog, or a new focus ring. Platform elements are specified in `references/components.md`.
 - Sample data is obviously sample and internally consistent. Do not invent customers, logos, or testimonials.
+
+## For agents
+
+This file is the whole assignment until the work narrows it. The routing table is the index: read a row, read only that row's files, load depth when the task touches it. Reading the whole repo is not diligence; it is noise.
+
+- The description in the frontmatter is the trigger. If the task is an interface, you are in the right place.
+- Escalate depth: `SKILL.md` now, the one row the task touches next, the recipe file only while composing. Reference files are pull, not homework.
+- `references/base.css` is the authority for values. `references/tokens.json` is the machine export of it, verified by `scripts/check-tokens.py`. When they disagree, run the script and fix the loser.
+- Verify like a machine: computed styles, geometry, both themes. A screenshot can pass while the stylesheet 404'd. The protocol is in `references/machines.md`.
+- When you must go beyond the repo, write the exception the way `soft.md` writes exceptions: one paragraph, bounded, with a refuse list.
 
 ## Stack
 

@@ -37,6 +37,41 @@ The judgments in this repo condense; they do not appear from taste alone. Each e
 - **Bento Grid: Explained with Examples and Code** — Banani. https://www.banani.co — Origins in the compartmentalized lunch box, and the one honest rule the trend forgot: tile sizes follow content importance, or the grid is wallpaper.
 - **Best Bento Grid Design Examples** — Mockuuups Studio. https://mockuuups.studio — The gallery. Look for the ones that stop being grids and become charts; that is the failure mode `grids.md` guards against.
 
+## AI-native and agentic
+
+- **Agent Skills specification** — agentskills.io, 2025–26. The format this repo follows: SKILL.md frontmatter and body, scripts/, references/, assets/, and the three loading levels — metadata at startup, instructions on activation, resources on demand. "Keep your main SKILL.md under 500 lines" is their rule and this repo's shape.
+- **Equipping agents for the real world with Agent Skills** — Anthropic, 2025. https://www.anthropic.com — Progressive disclosure as the core design principle for skills: a well-organized manual that starts small and goes deep only when the task does.
+- **Agent Skills: Progressive Disclosure as a System Design** — SwirlAI Newsletter, 2026. The engineering reading of the same spec: what loads when, and why.
+- **Designing For Agentic AI: Practical UX Patterns For Control** — Smashing Magazine, 2026. Human-in-the-loop and human-on-the-loop controls, override paths, trust signals — the patterns `ai-interfaces.md` turns into approval cards and undo rules.
+- **Designing Stable Interfaces For Streaming Content** — Smashing Magazine, 2026. The three streaming laws — scroll pinning, layout shift, render frequency — verified in demos. `ai-interfaces.md` quotes them almost verbatim.
+- **AI chat interfaces: anatomy, patterns, pitfalls** — Setproduct, 2026. Message states, streaming, mobile versus desktop chat layouts, and the anti-patterns (bubble alternation, spinner-for-stream).
+- **Generative UI and Outcome-Oriented Design** — Nielsen Norman Group. The definition `ai-interfaces.md` inherits: the interface is generated in real time to serve an outcome, and the person still needs control.
+- **AI SDK: Generative User Interfaces** — ai-sdk.dev (Vercel). The component-vocabulary approach: the model picks from shipped components and fills them; it does not author markup.
+- **AI Agent Design Patterns** — agentic-design.ai. A pattern catalog for agent builders — useful as names, not as visual direction.
+- **The Essential AI Agent UI: Streaming, Memory, and Citations** — Kommunicate, 2026. The trust trio made concrete.
+- **AI Chat UI Pattern** — uxpatterns.dev. The collection of streaming and chat implementations behind the "streaming is the baseline" rule.
+
+## Machines
+
+- **Design Systems for LLM Agents: Two Files That Fix Everything** — Design Systems Collective, 2026. The values-plus-rules split `machines.md` follows: tokens a program can read, rules a program can apply.
+- **My 4-step framework to make design systems AI-readable** — Muz.li, 2026. From 12% to 94% token accuracy — the failure mode (parallel, hallucinated token names) and the fix (exact names, machine-readable exports).
+- **Design tokens that AI can actually read** — Romina Kavcic, The Design System Guide, 2025. AI-readable token structure versus Figma-for-humans structure.
+- **Machine-Readable Design Tokens for AI-Ready Design Systems** — Southleft, 2026. Tokens as named design decisions a pipeline can consume.
+- **Agent-friendly documentation** — the Agent-Friendly Documentation Spec and its write-ups (mojar.ai, jamdesk, LogRocket, 2026). The principles `machines.md` is written against: agents read everything, so explicitness beats convenience and precise errors beat forgiving defaults.
+- **Agent Skills for Large Language Models: Architecture** — arXiv, 2026. The formal paper: progressive disclosure, portable skill definitions, MCP integration.
+
+## Frontier 2026
+
+- **Web Design Trends 2026: What's In and What's Out** — Bubble, 2026. "Barely-there UI" and "anti-grid brutalism" named in the wild; both carry gates in `frontier.md` before they carry a page.
+- **Top Web Design Trends for 2026** — Figma. The useful cut: last year's cutting edge (dark mode, gradients, playful motion) is now baseline expectation — which is exactly why it is no longer a direction.
+- **Top 10 graphic design trends for 2026** — Adobe. "Exaggerated, playful letters and text": the expressive-letters entry in `frontier.md`, display-only, family-count law intact.
+- **WebGL for Designers: Creating Interactive, Shader-Driven Graphics** — Tympanus (Codrops), 2026. The layer-based workflow that makes shader fields a design material rather than a code stunt.
+- **Best WebGL Websites** — Awwwards. The gallery. The winners hold type off the brightest band and keep a fallback; the failures are scroll-jacked scenes.
+- **The SaaS design trend that's boring and bettering UI: linear design** — LogRocket, 2025. The Linear school — dense, dark, keyboard-first — and how to use it without every product looking like every other product.
+- **Why Webflow making GSAP free reshaped web animation** — Pravin Kumar, 2026. GSAP fully free since 2025: the cost of orchestration dropped to zero, so the restraint in `interaction.md` is the only remaining budget.
+- **Interop 2026** — CSS-Tricks / web-platform. Anchor positioning landing across engines; the year the tethered popover stopped needing a library.
+- **Detect fallback positions with anchored container queries** — Chrome DevRel, 2025, and **Building dynamic toggletips using anchored container queries** — Piccalil, 2026. The native-CSS frontier entries in `frontier.md`: popover, anchor, container queries, with fallbacks built in.
+
 ## Access
 
 - **WCAG 2.2** — W3C. https://www.w3.org/TR/WCAG22/ — The 4.5:1 and 3:1 floors this repo enforces before any direction is committed.
