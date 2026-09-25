@@ -1,0 +1,22 @@
+{
+  "name": "d-pill",
+  "owner": {
+    "name": "srivtx",
+    "url": "https://github.com/srivtx"
+  },
+  "plugins": [
+    {
+      "name": "d-pill",
+      "source": "./",
+      "description": "A design skill for agents that build interfaces. Commit a direction, ship the tokens, pass the machine gate.",
+      "version": "1.5.0",
+      "author": {
+        "name": "srivtx"
+      },
+      "homepage": "https://github.com/srivtx/d-pill",
+      "license": "MIT",
+      "keywords": ["design", "design-system", "design-tokens", "critique", "agents", "skill"],
+      "category": "design"
+    }
+  ]
+}

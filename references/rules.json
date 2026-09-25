@@ -1,0 +1,151 @@
+{
+  "$format": "d-pill machine rule registry v1. The engine is scripts/critique.py; it verifies this file matches its implementation before every run. Severity 'error' fails the gate; 'warn' is a judgment call to read, not ignore. Suppression (--allow, or the CI input of the same name) is a written exception: it belongs in the commit that uses it, not in memory.",
+  "$scales": "Every scale this registry checks is read from references/tokens.json — the verified export of base.css. When the export changes, the gate changes with it. There is no second set of numbers.",
+  "$findings": "file:line:col [dpill/rule-id] severity: message. Exit 0 clean, 2 findings, 1 broken invocation. Exit 2 with stderr is the Claude Code hook contract: the agent receives the findings as the reason to react.",
+  "rules": [
+    {
+      "id": "dpill/space-off-scale",
+      "severity": "error",
+      "target": "css",
+      "summary": "margin/padding/gap value is not on the space scale",
+      "check": "px/rem literals in margin, padding, gap, row-gap, column-gap against the space scale (4 8 12 16 24 32 48 64 96 128 px). var(), clamp(), and calc() with var() pass through.",
+      "fix": "Use --space-1..--space-10 or the classes that carry them (.stack, .cluster, .rows). A value off the scale is a new token decision — write it down or use the scale.",
+      "reference": "references/foundations.md"
+    },
+    {
+      "id": "dpill/radius-off-scale",
+      "severity": "error",
+      "target": "css",
+      "summary": "border-radius is not on the radius scale",
+      "check": "px/rem literals in any border-radius property against 4px, 6px, 10px, 999px. 50% is a warn pointing at --radius-full.",
+      "fix": "--radius-sm, --radius, --radius-lg, --radius-full. Nothing else, including 50%.",
+      "reference": "references/geometry.md"
+    },
+    {
+      "id": "dpill/font-off-ramp",
+      "severity": "error",
+      "target": "css",
+      "summary": "font-size is not on the type ramp",
+      "check": "px/rem literals in font-size against the ramp (12 13 15 16 18 24 36 56 px; 16 is the coarse-pointer input exception). var() and clamp() pass through.",
+      "fix": "--text-xs..--text-3xl. A size between two steps is not a size; it is a hesitation.",
+      "reference": "references/type.md"
+    },
+    {
+      "id": "dpill/z-off-scale",
+      "severity": "error",
+      "target": "css",
+      "summary": "z-index is not on the z scale",
+      "check": "integer z-index against 10 20 40 50 60 (and 0).",
+      "fix": "--z-sticky, --z-dropdown, --z-drawer, --z-dialog, --z-toast. A layer that needs 9999 is not a layer; it is a stack nobody mapped.",
+      "reference": "references/foundations.md"
+    },
+    {
+      "id": "dpill/duration-off-scale",
+      "severity": "error",
+      "target": "css",
+      "summary": "transition/animation duration is not on the duration scale",
+      "check": "ms/s literals in transition, animation, and their -duration forms against 120ms, 180ms, 240ms. 0 and 0.01ms (the reduced-motion disable) pass.",
+      "fix": "--dur-1, --dur-2, --dur-3. The scale is the discipline; a 300ms hover is a different page.",
+      "reference": "references/interaction.md"
+    },
+    {
+      "id": "dpill/easing-off-scale",
+      "severity": "warn",
+      "target": "css",
+      "summary": "timing function is not a system curve",
+      "check": "easing keywords and cubic-bezier() literals against the two system curves. var(--ease-*) and spring() pass.",
+      "fix": "--ease-out (arrival), --ease-in (exit). A new curve is a written exception with the reason.",
+      "reference": "references/interaction.md"
+    },
+    {
+      "id": "dpill/transition-all",
+      "severity": "error",
+      "target": "css",
+      "summary": "transition: all",
+      "check": "the literal property list 'all' in a transition declaration.",
+      "fix": "Name the properties that change (background, color, border-color). 'all' animates layout and teaches the page to jank.",
+      "reference": "references/interaction.md"
+    },
+    {
+      "id": "dpill/border-not-hairline",
+      "severity": "error",
+      "target": "css",
+      "summary": "border width over 1px",
+      "check": "px/rem literals in border and border-side properties above 1px.",
+      "fix": "Edges are 1px hairlines. Weight comes from --line-strong, not thickness.",
+      "reference": "references/details.md"
+    },
+    {
+      "id": "dpill/hardcoded-color",
+      "severity": "warn",
+      "target": "css",
+      "summary": "a literal color where a role should be",
+      "check": "hex, rgb(), hsl(), oklch() literals in color-bearing declarations. var() passes; color-mix over var() passes.",
+      "fix": "Roles from base.css. A color outside the roles is a chart palette or a written exception, never a mood.",
+      "reference": "references/foundations.md"
+    },
+    {
+      "id": "dpill/hover-no-focus",
+      "severity": "warn",
+      "target": "css",
+      "summary": "a file styles :hover but never :focus-visible",
+      "check": "per CSS file: any :hover selector and no :focus/:focus-visible in the same file.",
+      "fix": "base.css draws the ring globally. If this file's controls ride on that, declare it; if not, the keyboard user sees nothing.",
+      "reference": "references/components.md"
+    },
+    {
+      "id": "dpill/no-reduced-motion",
+      "severity": "warn",
+      "target": "project",
+      "summary": "motion is used but prefers-reduced-motion appears in no scanned file",
+      "check": "any duration found and no prefers-reduced-motion media block anywhere in the scanned set.",
+      "fix": "base.css ships the reduced-motion block. Use it; do not fork the tokens without carrying it.",
+      "reference": "references/a11y.md"
+    },
+    {
+      "id": "dpill/inline-token-bypass",
+      "severity": "warn",
+      "target": "html",
+      "summary": "sizing literals inside a style attribute",
+      "check": "style=\"...\" containing font-size/padding/margin/gap/border-radius/width/height with a number.",
+      "fix": "Classes and vars. A style attribute with literals in it is a token system nobody uses.",
+      "reference": "references/foundations.md"
+    },
+    {
+      "id": "dpill/img-no-alt",
+      "severity": "error",
+      "target": "html",
+      "summary": "an <img> with no alt attribute",
+      "check": "every <img> tag carries an alt attribute (alt=\"\" counts — declared decorative).",
+      "fix": "Meaningful images get words. Decorative ones get alt=\"\" — the attribute is the decision.",
+      "reference": "references/a11y.md"
+    },
+    {
+      "id": "dpill/img-no-dimensions",
+      "severity": "warn",
+      "target": "html",
+      "summary": "an <img> without width and height",
+      "check": "every <img> carries width and height attributes so the box is reserved before load.",
+      "fix": "Reserve the space. Nothing below an unsized image should ever move — especially not under a stream.",
+      "reference": "references/ai-interfaces.md"
+    },
+    {
+      "id": "dpill/lang-missing",
+      "severity": "error",
+      "target": "html",
+      "summary": "<html> has no lang attribute",
+      "check": "the <html> tag carries lang.",
+      "fix": "One attribute decides which voice reads every word on the page. Set it.",
+      "reference": "references/a11y.md"
+    },
+    {
+      "id": "dpill/control-no-name",
+      "severity": "error",
+      "target": "html",
+      "summary": "a button, link, or summary with no accessible name",
+      "check": "every button, href link, and summary has text content, aria-label, aria-labelledby, or title.",
+      "fix": "Buttons are verbs. An icon control gets aria-label with the verb — 'Close', not 'X'.",
+      "reference": "references/components.md"
+    }
+  ]
+}

@@ -59,9 +59,24 @@ The judgments in this repo condense; they do not appear from taste alone. Each e
 - **Machine-Readable Design Tokens for AI-Ready Design Systems** — Southleft, 2026. Tokens as named design decisions a pipeline can consume.
 - **Agent-friendly documentation** — the Agent-Friendly Documentation Spec and its write-ups (mojar.ai, jamdesk, LogRocket, 2026). The principles `machines.md` is written against: agents read everything, so explicitness beats convenience and precise errors beat forgiving defaults.
 - **Agent Skills for Large Language Models: Architecture** — arXiv, 2026. The formal paper: progressive disclosure, portable skill definitions, MCP integration.
+- **Agent Skills specification** — agentskills.io, 2025–26. The closed frontmatter field set (name, description, license, compatibility, metadata, allowed-tools) this repo's frontmatter now follows exactly — off-spec fields are dropped silently by spec-conforming tooling, which is why the triggers live in `description`.
+- **Design Token Drift: We Audited 375 Sites. Only 7.5% Got It Right** — Design Systems Collective, 2026. The number behind the gate: average token coverage 40.4%, 17,731 hardcoded values, and only 7.5% of sites above 90% coverage. Drift is not a vibe; it is counted.
+- **Design Tokens specification 2025.10** — W3C Design Tokens Community Group. The DTCG interchange format reached its first stable version; `tokens.json` stays a flat d-pill export (roles first), but the bridge now has a standard to bridge to.
+- **Design Tokens Technical Reports 2025.10** — designtokens.org. The editor's view of the same spec, and the group's repos.
+- **10up's WordPress stylelint token rules and `declaration-strict-value`** — 10up / scale-unlimited. The precedent for linting token usage in CSS, per project. d-pill ships the rules with the system instead, so they travel together.
+- **Claude Code hooks** — code.claude.com. The `PostToolUse`/`Stop` hook contract `machines.md` wires the gate into: exit 2 routes stderr to the agent as the reason to react; a Stop hook can hold the task open until findings are zero.
+- **Model Context Protocol: server quickstart and registry** — modelcontextprotocol.io. The stdio JSON-RPC shape `scripts/mcp-server.py` implements on the standard library alone, and the npm-backed registry that lists such servers.
+- **chrome-devtools-mcp** — ChromeDevTools, GitHub. The other half of the agent loop: agents already screenshot and trace live pages. d-pill's gate is the judgment half that tells them whether what they built is any good.
+- **skills.sh** — the skills leaderboard. Install telemetry for `npx skills add owner/repo` across ten-plus agents; the page a skill's frontmatter becomes when it is listed.
+- **impeccable** — pbakaus, GitHub. The adjacent tool: sixty-one deterministic slop-tells over rendered pages, its own registry and harness. d-pill differs on the one axis that matters: the rules here check against this system's own tokens, and travel with the skill instead of with the linter.
 
 ## Frontier 2026
 
+- **Web design award-winning traits 2026** — Lynxflow, 2026. The frequency survey behind `frontier.md`'s verdicts: ~80 winners across 16 competitions, 25 traits — micro-interactions 59, scrollytelling 38, generative elements 18, broken-grid 3. The evidence that the juries reward response and narrative, not memes.
+- **Web Platform features explorer** — web-platform-dx, ongoing. The usage percentages `frontier.md` quotes for the native-CSS wave: anchor 6.45%, popover 4.64%, `@starting-style` 4.2%, field-sizing 2.49%, `::details-content` 1.41% of Chrome page loads.
+- **Safari 18.2 and cross-document view transitions** — WebKit blog, 2025. The second engine shipping `@view-transition`, which is what makes page-transition identity a baseline move rather than a Chrome demo.
+- **Frontend Wrapped 2025** — LogRocket. The year in review that named container queries "default for component design" and production-ready anchor positioning.
+- **Liquid Glass recreations on the web** — the post-WWDC 2025 wave (daily.dev roundups, Joey Banks' Figma kits, the SVG-displacement "real refraction" experiments) and the immediate readability critique (raw.studio: too much blur, too little contrast). Both halves of the entry, gathered as it happened.
 - **Web Design Trends 2026: What's In and What's Out** — Bubble, 2026. "Barely-there UI" and "anti-grid brutalism" named in the wild; both carry gates in `frontier.md` before they carry a page.
 - **Top Web Design Trends for 2026** — Figma. The useful cut: last year's cutting edge (dark mode, gradients, playful motion) is now baseline expectation — which is exactly why it is no longer a direction.
 - **Top 10 graphic design trends for 2026** — Adobe. "Exaggerated, playful letters and text": the expressive-letters entry in `frontier.md`, display-only, family-count law intact.
@@ -71,6 +86,7 @@ The judgments in this repo condense; they do not appear from taste alone. Each e
 - **Why Webflow making GSAP free reshaped web animation** — Pravin Kumar, 2026. GSAP fully free since 2025: the cost of orchestration dropped to zero, so the restraint in `interaction.md` is the only remaining budget.
 - **Interop 2026** — CSS-Tricks / web-platform. Anchor positioning landing across engines; the year the tethered popover stopped needing a library.
 - **Detect fallback positions with anchored container queries** — Chrome DevRel, 2025, and **Building dynamic toggletips using anchored container queries** — Piccalil, 2026. The native-CSS frontier entries in `frontier.md`: popover, anchor, container queries, with fallbacks built in.
+- **Zeroheight Design Systems Report 2026** — zeroheight. Adoption stays uneven — 7% fully adopted, and AI users report higher adoption but lower trust. The trust gap a verifiable gate is for.
 
 ## Access
 

@@ -2,6 +2,8 @@
 
 Run this on the real markup after it exists. A fail is fixed before you call the UI done. Do not paste this list back to the user. In the reply, name the direction and one sentence on what changed.
 
+The gate has two halves and they run in order. First the machine: `python3 scripts/critique.py` on every HTML and CSS file you wrote — it checks the scales, the floors, and the tells, and exits 2 with `file:line:col [rule]` findings until they are fixed. The registry behind each rule is `references/rules.json`. Then this list, which is the judgment half: direction, focal point, one weather. The machine cannot see those, and a clean machine pass buys the review, not the pass.
+
 Check a wide window (around 1280) and a 390-wide window. If the page runs and a browser is available, tab from the skip link through the primary action, fire that action, and fire one error. A screenshot of the first paint is not this gate.
 
 The safe band for token lightness is in `foundations.md`. The ratios below are the floor when a color sits outside that band or when you are unsure.

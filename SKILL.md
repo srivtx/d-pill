@@ -9,16 +9,16 @@ description: >
   surfaces: chat interfaces, copilots, agent consoles, streaming responses,
   tool-call and approval UI, citations, and generative UI. Use when the user
   runs /d-pill, asks for a design system, says "make it look good", "make this
-  beautiful", "flawless UI", or asks you to design, restyle, or build a page,
-  screen, site, or component.
-when-to-use: >
-  Any website or web-app interface: a page, screen, component, theme, or
-  redesign. Chat, copilot, and agent surfaces. Machine-readable design tokens.
-  /d-pill.
+  beautiful", "flawless UI", asks you to design, restyle, or build a page,
+  screen, site, or component, or asks to check, lint, or gate an interface
+  against a design system. The critique has a machine half: scripts/critique.py
+  checks the written files against the token scales and access floors, exits 2
+  with file:line:col findings, and the agent fixes them before the work is
+  called done.
 license: MIT
 metadata:
   short-description: Interfaces that look decided
-  version: "1.4"
+  version: "1.5"
 ---
 
 # d-pill
@@ -57,7 +57,8 @@ Then only what the work touches:
 | Motion, focus, keyboard, loading, failure, empty | `references/interaction.md` |
 | A chat surface, a copilot, an agent's actions, streaming text, citations, approvals, generative UI | `references/ai-interfaces.md` |
 | Machine-readable tokens, feeding this system to another tool, verifying the export | `references/machines.md` and `references/tokens.json` |
-| A named frontier move: barely-there, anti-grid, shader hero, expressive letters, dense dark tools, adaptive pages | `references/frontier.md` |
+| Checking written HTML/CSS against the scales, running the gate in hooks, MCP, or CI | `scripts/critique.py`, the registry in `references/rules.json`, and the wiring in `references/machines.md` |
+| A named frontier move: barely-there, anti-grid, shader hero, expressive letters, dense dark tools, adaptive pages, micro-interaction density, scrollytelling, page transitions, generative imagery, liquid glass | `references/frontier.md` |
 | Soft cards, a status strip, a personal site or portfolio with the craft look | `references/soft.md`, then `references/formats.md` |
 | A landing page, a story, pricing, proof, photography | `references/narrative.md`, `references/art.md`, and `references/surfaces.md` |
 | An app shell, dashboard, settings, auth, docs, or first run | `references/surfaces.md` |
@@ -103,7 +104,9 @@ Use `references/writing.md`. Buttons are verbs. Errors say what to do next. Do n
 
 ### 5. Pass the gate
 
-Run `references/critique.md` on the real markup at a wide viewport and a 390-wide viewport. Fix every fail. If a browser is available and the page runs, use it: tab through, fire the primary action, fire one error. A screenshot of the first paint is not the gate.
+Run the machine half first: `python3 scripts/critique.py` on every HTML and CSS file you wrote. Fix every error; read every warning and either fix it or write the exception. The registry behind each rule is `references/rules.json`. Then run `references/critique.md` on the real markup at a wide viewport and a 390-wide viewport, and fix every fail. If a browser is available and the page runs, use it: tab through, fire the primary action, fire one error. A screenshot of the first paint is not the gate.
+
+A clean machine pass is permission to be judged, not a pass: it checks scales and floors, not direction or focal point.
 
 In the reply, name the direction and one sentence on what the critique changed. Do not paste the checklist.
 
@@ -130,6 +133,7 @@ This file is the whole assignment until the work narrows it. The routing table i
 - The description in the frontmatter is the trigger. If the task is an interface, you are in the right place.
 - Escalate depth: `SKILL.md` now, the one row the task touches next, the recipe file only while composing. Reference files are pull, not homework.
 - `references/base.css` is the authority for values. `references/tokens.json` is the machine export of it, verified by `scripts/check-tokens.py`. When they disagree, run the script and fix the loser.
+- The gate is part of the work, not a review of it: run `scripts/critique.py` on what you wrote, fix every finding, and say in the reply that the gate ran clean. Exit 2 is findings; stderr carries them in `file:line:col [rule] severity` form. The rule registry and the engine verify each other; if they drift, the drift is the bug.
 - Verify like a machine: computed styles, geometry, both themes. A screenshot can pass while the stylesheet 404'd. The protocol is in `references/machines.md`.
 - When you must go beyond the repo, write the exception the way `soft.md` writes exceptions: one paragraph, bounded, with a refuse list.
 

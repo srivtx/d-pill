@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>d-pill — a design skill for agents that build interfaces</title>
+<meta name="description" content="d-pill commits a direction, sets tokens, and runs a critique gate an agent can pass. One repository: the rules, the values, and the check.">
+<link rel="stylesheet" href="base.css">
+<style>
+  /* Direction: Spec. Rows of figures, records. Hue 215, the default.
+     No literal values in this block: every number is a token. */
+
+  .cards { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  a.card {
+    display: block;
+    flex: 1 1 var(--space-10);
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: var(--space-4);
+    text-decoration: none;
+    transition: background var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out);
+  }
+  a.card:hover, a.card:focus-visible { background: var(--bg-subtle); border-color: var(--line-strong); }
+  a.card h3 { margin: 0 0 var(--space-1); }
+  a.card p { margin: 0; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .swatch { width: var(--space-10); height: var(--space-8); border: var(--border); border-radius: var(--radius); }
+  .sw-bg { background: var(--bg); }
+  .sw-bg-subtle { background: var(--bg-subtle); }
+  .sw-surface { background: var(--surface); }
+  .sw-ink { background: var(--ink); }
+  .sw-ink-muted { background: var(--ink-muted); }
+  .sw-line { background: var(--line); }
+  .sw-accent { background: var(--accent); }
+  .sw-accent-soft { background: var(--accent-soft); }
+
+  .scale { display: flex; flex-direction: column; gap: var(--space-2); }
+  .step { display: flex; align-items: center; gap: var(--space-4); }
+  .step span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-muted); min-width: var(--space-9); }
+  .bar { height: var(--space-2); background: var(--ink); border-radius: var(--radius-sm); }
+  .w-1 { width: var(--space-1); } .w-2 { width: var(--space-2); }
+  .w-3 { width: var(--space-3); } .w-4 { width: var(--space-4); }
+  .w-5 { width: var(--space-5); } .w-6 { width: var(--space-6); }
+  .w-7 { width: var(--space-7); } .w-8 { width: var(--space-8); }
+  .w-9 { width: var(--space-9); } .w-10 { width: var(--space-10); }
+
+  .t-3xl { font-size: var(--text-3xl); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-family: var(--font-display); font-weight: 500; }
+  .t-2xl { font-size: var(--text-2xl); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-family: var(--font-display); font-weight: 500; }
+  .t-xl { font-size: var(--text-xl); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-family: var(--font-display); font-weight: 500; }
+  .t-lg { font-size: var(--text-lg); }
+  .t-md { font-size: var(--text-md); }
+  .t-sm { font-size: var(--text-sm); }
+
+  pre.install { background: var(--bg-subtle); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <a class="wordmark" href="#main" aria-label="d-pill home">d-pill</a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#directions">Directions</a>
+    <a href="#type">Type</a>
+    <a href="#color">Color</a>
+    <a href="#components">Components</a>
+    <a href="#gate">The gate</a>
+  </nav>
+  <button id="theme" aria-label="Toggle dark theme" aria-pressed="false">
+    <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <circle cx="10" cy="10" r="4"></circle>
+      <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.5 4.5l1.4 1.4M14.1 14.1l1.4 1.4M15.5 4.5l-1.4 1.4M5.9 14.1L4.5 15.5"></path>
+    </svg>
+  </button>
+</header>
+
+<main class="frame" id="main">
+
+<section class="section stack">
+  <p class="caps">A design skill for agents · v1.5</p>
+  <h1 class="display">Interfaces that<br>look decided.</h1>
+  <p class="lede">d-pill commits one direction, sets type and color as roles, and passes a critique before the work is called done. Now the critique has a machine half.</p>
+  <pre class="install"><code>git clone https://github.com/srivtx/d-pill.git .grok/skills/d-pill
+
+# or, from any skills runner:
+npx skills add srivtx/d-pill</code></pre>
+  <p class="quiet">MIT. Zero dependencies. Offline. The scripts are Python's standard library and nothing else.</p>
+</section>
+
+<section class="section stack" id="directions">
+  <h2>Directions</h2>
+  <p>The ten starting points. One direction per surface; the only mix allowed is a single borrowed slot, written down.</p>
+  <ul class="rows">
+    <li><span class="mono quiet">01</span><strong>Instrument</strong><span class="quiet">a tool someone uses every day</span><span></span></li>
+    <li><span class="mono quiet">02</span><strong>Spec</strong><span class="quiet">rows of figures, logs, records</span><span class="num quiet">this page</span></li>
+    <li><span class="mono quiet">03</span><strong>Editorial</strong><span class="quiet">a front page with a point of view</span><span></span></li>
+    <li><span class="mono quiet">04</span><strong>Atelier</strong><span class="quiet">a small set of work, hung rather than framed</span><span></span></li>
+    <li><span class="mono quiet">05</span><strong>Quiet luxury</strong><span class="quiet">something expensive and still</span><span></span></li>
+    <li><span class="mono quiet">06</span><strong>Soft service</strong><span class="quiet">health, school, care, a local business</span><span></span></li>
+    <li><span class="mono quiet">07</span><strong>Signal</strong><span class="quiet">a technical product, dark, precise</span><span></span></li>
+    <li><span class="mono quiet">08</span><strong>Civic</strong><span class="quiet">a public institution or a public dataset</span><span></span></li>
+    <li><span class="mono quiet">09</span><strong>Broadsheet</strong><span class="quiet">long reading</span><span></span></li>
+    <li><span class="mono quiet">10</span><strong>Play</strong><span class="quiet">when delight is the product</span><span></span></li>
+  </ul>
+</section>
+
+<section class="section stack" id="type">
+  <h2>Type</h2>
+  <p>One ramp. Most steps go unused on a given screen; that unused range is the design.</p>
+  <ul class="rows">
+    <li><span class="mono quiet">text-3xl</span><span class="t-3xl">Decided</span><span class="quiet">3.5rem</span><span></span></li>
+    <li><span class="mono quiet">text-2xl</span><span class="t-2xl">Decided</span><span class="quiet">2.25rem</span><span></span></li>
+    <li><span class="mono quiet">text-xl</span><span class="t-xl">Decided</span><span class="quiet">1.5rem</span><span></span></li>
+    <li><span class="mono quiet">text-lg</span><span class="t-lg">Decided</span><span class="quiet">1.125rem</span><span></span></li>
+    <li><span class="mono quiet">text-md</span><span class="t-md">Decided, body</span><span class="quiet">0.9375rem</span><span></span></li>
+    <li><span class="mono quiet">text-sm</span><span class="quiet t-sm">Decided, quiet</span><span class="quiet">0.8125rem</span><span></span></li>
+    <li><span class="mono quiet">text-xs</span><span class="caps">DECIDED, CAPS</span><span class="quiet">0.75rem</span><span></span></li>
+  </ul>
+</section>
+
+<section class="section stack" id="color">
+  <h2>Color</h2>
+  <p>Roles, not moods. One hue variable re-derives the whole quiet side; the accent is scarce on purpose. Flip the theme with the control in the header — both palettes clear their floors.</p>
+  <div class="swatches">
+    <div class="swatch sw-bg"></div>
+    <div class="swatch sw-bg-subtle"></div>
+    <div class="swatch sw-surface"></div>
+    <div class="swatch sw-ink"></div>
+    <div class="swatch sw-ink-muted"></div>
+    <div class="swatch sw-line"></div>
+    <div class="swatch sw-accent"></div>
+    <div class="swatch sw-accent-soft"></div>
+  </div>
+  <p class="quiet">bg · bg-subtle · surface · ink · ink-muted · line · accent · accent-soft — verified against the export, <span class="mono">python3 scripts/check-tokens.py</span>.</p>
+</section>
+
+<section class="section stack" id="space">
+  <h2>Space</h2>
+  <p>A fixed scale. The bars below are the tokens themselves, drawn at true width.</p>
+  <div class="scale">
+    <div class="step"><span>4</span><div class="bar w-1"></div></div>
+    <div class="step"><span>8</span><div class="bar w-2"></div></div>
+    <div class="step"><span>16</span><div class="bar w-4"></div></div>
+    <div class="step"><span>32</span><div class="bar w-6"></div></div>
+    <div class="step"><span>64</span><div class="bar w-8"></div></div>
+    <div class="step"><span>128</span><div class="bar w-10"></div></div>
+  </div>
+</section>
+
+<section class="section stack" id="components">
+  <h2>Components</h2>
+  <p>Controls exist only where a behavior exists. Every one ships hover, focus-visible, and disabled.</p>
+  <div class="cluster">
+    <button>Save changes</button>
+    <button class="primary">New order</button>
+    <button class="ink">Export</button>
+    <button class="ghost">Cancel</button>
+    <button class="danger">Delete list</button>
+    <button disabled>Reprinting…</button>
+  </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="you@bakery.example">
+    <span class="hint">The one you log in with.</span>
+  </div>
+  <table>
+    <caption class="quiet">Token · value · where it is law</caption>
+    <thead><tr><th>Token</th><th>Value</th><th>Law</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">--dur-1</td><td class="num">120ms</td><td>hover, color, borders</td></tr>
+      <tr><td class="mono">--dur-2</td><td class="num">180ms</td><td>menus, drawers</td></tr>
+      <tr><td class="mono">--dur-3</td><td class="num">240ms</td><td>dialogs, page-level</td></tr>
+      <tr><td class="mono">--ease-out</td><td class="mono">cubic-bezier(0.16, 1, 0.3, 1)</td><td>arrival</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section stack" id="motion">
+  <h2>Motion</h2>
+  <p>Motion shows where something came from or what changed. It does not perform. Hover or focus these:</p>
+  <div class="cards">
+    <a class="card" href="#directions"><h3>Ten directions</h3><p>Each with a refuse list, in the SKILL.md routing table.</p></a>
+    <a class="card" href="#type"><h3>One ramp</h3><p>Sizes from the export, never invented between steps.</p></a>
+    <a class="card" href="#gate"><h3>A gate that runs</h3><p>Not a checklist someone reads. A script that exits.</p></a>
+  </div>
+</section>
+
+<section class="section stack" id="gate">
+  <h2>The gate</h2>
+  <p class="lede">The critique is now two halves. The machine checks the scales and the floors; the judgment checks direction, focal point, and one weather. A clean machine pass is permission to be judged, not a pass.</p>
+  <pre><code>$ python3 scripts/critique.py src/
+
+src/orders.css:41:8 [dpill/space-off-scale] error: 17px in padding
+  is not on the space scale (4px 8px 12 16 24 32 48 64 96 128 px).
+  Use the token, or write the exception down.
+src/orders.css:42:3 [dpill/transition-all] error: transition: all
+  animates layout. Name the properties that actually change.
+
+2 files checked — 2 error(s), 0 warning(s); exit 2.</code></pre>
+  <p>Findings go to stderr in <span class="mono">file:line:col [rule] severity</span> form. Exit 2 with stderr is the Claude Code hook contract — the agent receives the findings as the reason to react, fixes them, and re-runs. Same engine, three shells: the CLI, a zero-dependency MCP server (<span class="mono">scripts/mcp-server.py</span>), and a GitHub Action (<span class="mono">uses: srivtx/d-pill@v1</span>).</p>
+  <p class="quiet">This page passes its own gate: <span class="mono">python3 scripts/critique.py docs/index.html</span> — exit 0, in CI, on every push.</p>
+</section>
+
+</main>
+
+<footer class="section frame">
+  <hr>
+  <p class="quiet cluster between">
+    <span>d-pill · MIT · <a href="https://github.com/srivtx/d-pill">github.com/srivtx/d-pill</a></span>
+    <span>Rules as data: <span class="mono">references/rules.json</span></span>
+  </p>
+</footer>
+
+<script>
+  var button = document.getElementById('theme');
+  var root = document.documentElement;
+  var set = function (dark) {
+    if (dark) { root.setAttribute('data-theme', 'dark'); }
+    else { root.removeAttribute('data-theme'); }
+    button.setAttribute('aria-pressed', String(dark));
+  };
+  button.addEventListener('click', function () {
+    set(root.getAttribute('data-theme') !== 'dark');
+  });
+  set(window.matchMedia('(prefers-color-scheme: dark)').matches);
+</script>
+</body>
+</html>

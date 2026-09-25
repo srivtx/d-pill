@@ -1,0 +1,11 @@
+{
+  "name": "d-pill",
+  "version": "1.5.0",
+  "description": "A design skill for agents that build interfaces. Commit a direction, ship the tokens, pass the gate.",
+  "author": {
+    "name": "srivtx"
+  },
+  "homepage": "https://github.com/srivtx/d-pill",
+  "license": "MIT",
+  "keywords": ["design", "design-system", "design-tokens", "critique", "agents", "skill"]
+}

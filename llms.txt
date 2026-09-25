@@ -1,0 +1,68 @@
+# d-pill
+
+> A design skill for agents that build interfaces. d-pill commits one visual direction, sets type and color as roles, and passes a critique gate before the work is called done. The critique has a machine half now: rules as data, a zero-dependency checker, an MCP server, and a GitHub Action. MIT, offline, no dependencies.
+
+The procedure is SKILL.md. The knowledge is references/. The values are references/tokens.json, verified against references/base.css by scripts/check-tokens.py. The gate is scripts/critique.py, its registry references/rules.json.
+
+Install with `git clone https://github.com/srivtx/d-pill.git ~/.grok/skills/d-pill`, or `npx skills add srivtx/d-pill`, or Claude Code: `/plugin marketplace add srivtx/d-pill`, then `/plugin install d-pill@d-pill`.
+
+## SKILL.md
+
+- [SKILL.md](SKILL.md): procedure, laws, the routing table — what to read for which job.
+
+## references
+
+- [sense.md](references/sense.md): seeing — proportion, material, the headline, what to leave out.
+- [taste.md](references/taste.md): the judgment — effort hidden, one weather, finish.
+- [direction.md](references/direction.md): the ten directions and their CSS.
+- [styles.md](references/styles.md): the styles — book, poster, object, screen, the memes done properly.
+- [faces.md](references/faces.md): judging a typeface and which class it is.
+- [grids.md](references/grids.md): manuscript, column, modular, hierarchical grids.
+- [harmony.md](references/harmony.md): how hues relate.
+- [proportion.md](references/proportion.md): size relationships, rhythm, the first screen.
+- [type.md](references/type.md): setting type — pairing, leading, rag, figures.
+- [color.md](references/color.md): judging color — value, temperature, dark themes.
+- [foundations.md](references/foundations.md): the tokens, the roles, how to edit them.
+- [base.css](references/base.css): the tokens and the classes — the authority.
+- [tokens.json](references/tokens.json): the machine export of base.css, verified.
+- [rules.json](references/rules.json): the machine rule registry — the gate's rules as data.
+- [layout.md](references/layout.md): primitives, density, breakpoints.
+- [arrange.md](references/arrange.md): which container — list, table, gallery, form, feed.
+- [geometry.md](references/geometry.md): optical alignment, radius, bleed, crops.
+- [components.md](references/components.md): controls, overlays, anatomy.
+- [details.md](references/details.md): hairlines, focus, press, skeletons.
+- [interaction.md](references/interaction.md): time, forms, failure, motion, streaming.
+- [behavior.md](references/behavior.md): distance, choice, scent, trust.
+- [patterns.md](references/patterns.md): master-detail, filters, pagination, calendar, consent.
+- [narrative.md](references/narrative.md): how a page argues.
+- [art.md](references/art.md): light, grade, crop, when to have no picture.
+- [surfaces.md](references/surfaces.md): app, marketing, dashboard, docs, auth.
+- [commerce.md](references/commerce.md): product, bag, checkout.
+- [formats.md](references/formats.md): portfolio, event, help, changelog, status, account, inbox.
+- [mobile.md](references/mobile.md): the phone as its own composition.
+- [world.md](references/world.md): other languages, RTL, locale marks.
+- [brand.md](references/brand.md): marks, lockups, clear space, misuse.
+- [icons.md](references/icons.md): drawing a set that looks like one hand.
+- [dataviz.md](references/dataviz.md): charts and tables that tell the truth.
+- [information.md](references/information.md): diagrams, steps, wayfinding.
+- [a11y.md](references/a11y.md): access as a design constraint.
+- [writing.md](references/writing.md): words on the interface.
+- [ai-interfaces.md](references/ai-interfaces.md): chat, copilots, agent actions, streaming, approvals, generative UI.
+- [machines.md](references/machines.md): the machine contract — the gate, hooks, MCP, CI.
+- [frontier.md](references/frontier.md): the 2025–26 moves, each with a gate and a refuse list.
+- [soft.md](references/soft.md): the craft site — soft surfaces, status strip, pixel accents, its motion.
+- [systems.md](references/systems.md): adding tokens and components without forking.
+- [critique.md](references/critique.md): the gate — the judgment half.
+- [craft.md](references/craft.md): the visual tells and the fix for each.
+- [reading.md](references/reading.md): the sources behind the judgments.
+
+## scripts
+
+- [critique.py](scripts/critique.py): the machine gate. Zero dependencies. Findings as file:line:col [rule] severity. Exit 0 clean, 2 findings, 1 broken invocation.
+- [mcp-server.py](scripts/mcp-server.py): d-pill over MCP (stdio, JSON-RPC 2.0, standard library only). Tools: critique, list_rules, token.
+- [check-tokens.py](scripts/check-tokens.py): verifies tokens.json against base.css.
+- [contrast.py](scripts/contrast.py): contrast for a custom OKLCH pair.
+
+## docs
+
+- [docs/index.html](docs/index.html): the demo page. It passes its own gate, in CI, on every push.

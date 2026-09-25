@@ -1,0 +1,44 @@
+name: 'd-pill critique'
+description: 'The d-pill design gate. Checks HTML/CSS against the d-pill token scales (space, ramp, radius, duration, z) and access floors, with file:line:col findings.'
+author: 'srivtx'
+inputs:
+  paths:
+    description: 'Comma-separated files or directories to check.'
+    required: false
+    default: '.'
+  allow:
+    description: 'Comma-separated rule ids to suppress. A suppression is a written exception.'
+    required: false
+    default: ''
+  strict:
+    description: "'true' to fail on warnings too."
+    required: false
+    default: 'false'
+branding:
+  icon: 'check-circle'
+  color: 'gray-dark'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Run the d-pill gate'
+      shell: bash
+      run: |
+        set -e
+        GATE="${{ github.action_path }}/scripts/critique.py"
+        ARGS=()
+        if [ -n "${{ inputs.allow }}" ]; then
+          OLDIFS="$IFS"; IFS=','
+          for rule in ${{ inputs.allow }}; do
+            [ -n "$rule" ] && ARGS+=(--allow "$(echo "$rule" | xargs)")
+          done
+          IFS="$OLDIFS"
+        fi
+        if [ "${{ inputs.strict }}" = "true" ]; then
+          ARGS+=(--strict)
+        fi
+        OLDIFS="$IFS"; IFS=','
+        for p in ${{ inputs.paths }}; do
+          [ -n "$p" ] && ARGS+=("$(echo "$p" | xargs)")
+        done
+        IFS="$OLDIFS"
+        python3 "$GATE" "${ARGS[@]}"
