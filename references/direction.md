@@ -405,4 +405,4 @@ Delight is the point. Constraint is what keeps it from becoming noise.
 
 ## Fonts you do not reach for
 
-Unless the existing brand uses them: Inter, Roboto, Arial, Helvetica, Open Sans, Lato, Montserrat, Poppins, Nunito, Space Grotesk, and `system-ui` as the designed voice. `system-ui` is a fallback, not a choice.
+Unless the existing brand uses them: Inter, Roboto, Arial, Helvetica, Open Sans, Lato, Montserrat, Poppins, Nunito, and `system-ui` as the designed voice. `system-ui` is a fallback, not a choice. Space Grotesk is Soft editorial's body face (`soft.md`); outside that recipe it is another meme.

@@ -23,10 +23,10 @@ When a brand already exists, d-pill keeps the type and the color and fixes struc
 
 ## Install
 
-Any agent that loads a `SKILL.md` from a folder:
+Any agent that loads a `SKILL.md` from a folder (`~/.agents/skills` is the multi-agent global dir; Claude Code: `~/.claude/skills`):
 
 ```bash
-git clone https://github.com/srivtx/d-pill.git ~/.grok/skills/d-pill
+git clone https://github.com/srivtx/d-pill.git ~/.agents/skills/d-pill
 ```
 
 Any skills runner (Claude, Cursor, Codex, Copilot, and others):
@@ -42,7 +42,7 @@ Claude Code, as a plugin marketplace:
 /plugin install d-pill@d-pill
 ```
 
-Then ask for the interface, or run `/d-pill`. The procedure is `SKILL.md`. The knowledge is `references/`. The demo page is [`docs/index.html`](docs/index.html) — it passes its own gate, in CI, on every push.
+Then ask for the interface, or run `/d-pill`. The procedure is `SKILL.md`. The knowledge is `references/`. The demo page is [`docs/index.html`](docs/index.html) and the craft proof page is [`docs/soft.html`](docs/soft.html) — both pass their own gate, in CI, on every push. GitHub Pages serves `docs/` straight from `main`, no build step: <https://srivtx.github.io/d-pill/>.
 
 ## The gate
 
@@ -52,12 +52,12 @@ Most design systems are reading material. This one is executable. `scripts/criti
 $ python3 scripts/critique.py src/
 
 src/orders.css:41:8 [dpill/space-off-scale] error: 17px in padding is not on
-  the space scale (4px 8px 12 16 24 32 48 64 96 128 px). Use the token, or
-  write the exception down.
+  the space scale (4px 8px 12px 16px 24px 32px 48px 64px 96px 128px). Use the
+  token, or write the exception down.
 src/orders.css:42:3 [dpill/transition-all] error: transition: all animates
   layout. Name the properties that actually change.
 
-2 files checked — 2 error(s), 0 warning(s); exit 2.
+1 file checked — 2 error(s), 0 warning(s); exit 2.
 ```
 
 - **Rules as data.** The registry is `references/rules.json` — id, severity, what the engine checks, the fix, the reference behind each rule. The engine verifies the registry matches its implementation before every run, the same way `check-tokens.py` verifies the token export against `base.css`.
@@ -171,6 +171,12 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `action.yml` | This repo as a GitHub Action: the gate in CI |
 | `llms.txt` | The index for crawlers and agents |
 | `assets/mark.svg` | The mark |
+| `docs/soft.html` | The Soft editorial proof page — the recipe, rendered, gated |
+| `scripts/check-skill.py` | Verifies SKILL.md spec-legality and version agreement |
+| `scripts/mcp-smoke.py` | Proves the MCP server speaks and its names resolve |
+| `CHANGELOG.md` | Versioned release notes |
+| `SECURITY.md` | The security posture: offline, deterministic, stdlib-only |
+| `ROADMAP.md` | Signal-gated bets and the never list |
 
 ## Use the stylesheet
 

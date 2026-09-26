@@ -4,7 +4,7 @@
 
 The procedure is SKILL.md. The knowledge is references/. The values are references/tokens.json, verified against references/base.css by scripts/check-tokens.py. The gate is scripts/critique.py, its registry references/rules.json.
 
-Install with `git clone https://github.com/srivtx/d-pill.git ~/.grok/skills/d-pill`, or `npx skills add srivtx/d-pill`, or Claude Code: `/plugin marketplace add srivtx/d-pill`, then `/plugin install d-pill@d-pill`.
+Install with `git clone https://github.com/srivtx/d-pill.git ~/.agents/skills/d-pill` (Claude Code: `~/.claude/skills`), or `npx skills add srivtx/d-pill`, or Claude Code: `/plugin marketplace add srivtx/d-pill`, then `/plugin install d-pill@d-pill`.
 
 ## SKILL.md
 
@@ -56,13 +56,23 @@ Install with `git clone https://github.com/srivtx/d-pill.git ~/.grok/skills/d-pi
 - [craft.md](references/craft.md): the visual tells and the fix for each.
 - [reading.md](references/reading.md): the sources behind the judgments.
 
+## repo
+
+- [CHANGELOG.md](CHANGELOG.md): versioned release notes.
+- [SECURITY.md](SECURITY.md): the security posture — offline, deterministic, standard library only.
+- [ROADMAP.md](ROADMAP.md): signal-gated bets and the never list.
+
 ## scripts
 
 - [critique.py](scripts/critique.py): the machine gate. Zero dependencies. Findings as file:line:col [rule] severity. Exit 0 clean, 2 findings, 1 broken invocation.
 - [mcp-server.py](scripts/mcp-server.py): d-pill over MCP (stdio, JSON-RPC 2.0, standard library only). Tools: critique, list_rules, token.
 - [check-tokens.py](scripts/check-tokens.py): verifies tokens.json against base.css.
 - [contrast.py](scripts/contrast.py): contrast for a custom OKLCH pair.
+- [check-skill.py](scripts/check-skill.py): verifies SKILL.md frontmatter against the spec, and that the versions agree.
+- [mcp-smoke.py](scripts/mcp-smoke.py): drives the MCP server through a real session; asserts the token tool's names resolve.
 
 ## docs
 
 - [docs/index.html](docs/index.html): the demo page. It passes its own gate, in CI, on every push.
+- [docs/soft.html](docs/soft.html): the proof page for the Soft editorial recipe — the override, rendered and gated.
+- [docs/llms.txt](docs/llms.txt): the site index for crawlers, served at the Pages root.

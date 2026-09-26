@@ -1,0 +1,47 @@
+# Roadmap
+
+Ambition parked where it cannot bloat the references. Each bet below waits
+for a signal, and the signal is named. Anything not on this list and not in
+the never list is probably a distraction — say so in an issue first.
+
+## Signal-gated bets
+
+| Bet | Trigger | Shape |
+|---|---|---|
+| A DTCG/W3C design-token export beside `tokens.json` | ≥2 issues asking for Figma or Style Dictionary interop | a `$value`-shaped export, verified by the same check-tokens law |
+| Findings that teach: each rule carries the replacement token in its payload | hook users report agents cannot self-fix findings | registry entries gain a `suggest` field; the engine reads it |
+| A chrome-devtools-mcp pairing recipe in `machines.md` | repeated "gate passes but the page looks wrong" reports | docs only: computed styles against `tokens.json`, mid-task |
+| Release automation from `CHANGELOG.md` on tag push | releases become monthly | one small workflow |
+| Translated READMEs | clustered non-English traffic, or ≥3 requests for one language | `README.<lang>.md`; the SKILL.md body stays English — the register is the judgment |
+| Narrow direction proxies (a second accent hue with no written exception) | real reported misses, not vibes | one rule per miss; judgment stays human |
+| Show HN and the agentskills.io showcase | an awesome-list merge, ≥100 skills.sh installs, a clean release | a launch, not a feature |
+| skills.sh badge in the README | the listing exists (it needs real `npx skills add` installs first) | one badge line |
+
+## Never
+
+- **A component kit.** Not React, not Web Components, not a copy-paste
+  components directory. That is shadcn's lane, and it forks taste every
+  release; d-pill's own law is "do not invent a new checkbox."
+- **A docs-framework site.** No Docusaurus, no build step. README, one demo
+  page, and `llms.txt` are the right size for a design system.
+- **An npm package for the engine.** The engine is Python's standard
+  library; npx is a Node surface. Every real install surface is already
+  covered — the skills CLI, the plugin marketplace, the Action, the clone.
+  Revisit only on sustained non-Python demand.
+- **CSS-framework positioning.** `base.css` serves the skill; the skill is
+  not a CSS framework. That lane belongs to water.css, and it fades.
+- **Editor extensions.** The audience is agents; impeccable already runs the
+  17-harness playbook. A maintenance treadmill with zero differentiation.
+- **A rule-count arms race.** 152 rules is not more honest than 16 verified
+  ones. The selftest and the registry check are the credibility.
+- **A machine taste score.** The machine half checks scales and floors;
+  direction and focal point are the judgment half. A taste scorer
+  manufactures false authority and destroys the product's philosophy.
+- **Per-harness file forks** — `.cursor/rules`, `copilot-instructions`,
+  AGENTS.md copies of the knowledge. One source of truth, three real
+  surfaces (SKILL.md, `.claude-plugin`, `action.yml`). Fragmenting the
+  system into per-agent files is the industry's problem, not the fix.
+
+The test for any new file: it is verified in CI, or it is pull-not-push
+prose an agent loads on demand, or it is an adoption surface with a named
+owner. Otherwise it does not get added.

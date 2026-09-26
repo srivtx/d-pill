@@ -22,22 +22,28 @@ runs:
   steps:
     - name: 'Run the d-pill gate'
       shell: bash
+      env:
+        # Inputs enter through the environment, never through string
+        # interpolation into the script — caller data stays data.
+        INPUT_PATHS: ${{ inputs.paths }}
+        INPUT_ALLOW: ${{ inputs.allow }}
+        INPUT_STRICT: ${{ inputs.strict }}
       run: |
         set -e
         GATE="${{ github.action_path }}/scripts/critique.py"
         ARGS=()
-        if [ -n "${{ inputs.allow }}" ]; then
+        if [ -n "$INPUT_ALLOW" ]; then
           OLDIFS="$IFS"; IFS=','
-          for rule in ${{ inputs.allow }}; do
+          for rule in $INPUT_ALLOW; do
             [ -n "$rule" ] && ARGS+=(--allow "$(echo "$rule" | xargs)")
           done
           IFS="$OLDIFS"
         fi
-        if [ "${{ inputs.strict }}" = "true" ]; then
+        if [ "$INPUT_STRICT" = "true" ]; then
           ARGS+=(--strict)
         fi
         OLDIFS="$IFS"; IFS=','
-        for p in ${{ inputs.paths }}; do
+        for p in $INPUT_PATHS; do
           [ -n "$p" ] && ARGS+=("$(echo "$p" | xargs)")
         done
         IFS="$OLDIFS"

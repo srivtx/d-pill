@@ -14,7 +14,7 @@ The rules also have a machine half now: `scripts/critique.py` checks written HTM
 
 - The rules are data: `references/rules.json` is the registry — id, severity, target, what the engine checks, the fix, the reference file behind the rule. The engine verifies the registry matches its implementation before every run and refuses to run an unverified rule set. Drift between engine and registry is the bug, same as drift between `base.css` and the export.
 - The values it checks are the values in `tokens.json`. Change the export, and the gate changes with it. There is no second set of numbers anywhere.
-- Findings are `file:line:col [dpill/rule] severity: message`, one per line, on stderr. Exit 0 clean, 2 findings, 1 the invocation itself is broken. `--json` for pipelines, `--quiet` errors-only, `--strict` warnings-count, `--list-rules` the registry.
+- Findings are `file:line:col [dpill/rule] severity: message`, one per line, on stderr. Exit 0 clean, 2 findings, 1 the invocation itself is broken — including a path that does not exist or is not HTML/CSS; a false clean is worse than a failure. `--json` for pipelines, `--quiet` errors-only, `--strict` warnings-count, `--list-rules` the registry, `--selftest` proves every rule fires.
 - Suppression is a written exception: `--allow dpill/z-off-scale` once, with the reason in the commit that uses it. A suppression that lives in someone's memory is a rule that no longer exists.
 - The honest scope: the machine checks scales (space, ramp, radius, duration, z), floors (alt, lang, names, hairlines), and tells (transition-all, literal colors). Direction, focal point, one material, one weather — that is the judgment half in `references/critique.md`. Zero machine findings is permission to be judged, not a pass.
 
@@ -68,16 +68,18 @@ One engine, three shells. The CLI is the engine; the others are thin skins over 
       "matcher": "Edit|Write",
       "hooks": [{
         "type": "command",
-        "command": "python3 ~/.claude/skills/d-pill/scripts/critique.py \"$CLAUDE_FILE_PATHS\" || true"
+        "command": "python3 ~/.claude/skills/d-pill/scripts/critique.py $CLAUDE_FILE_PATHS || true"
       }]
     }]
   }
 }
 ```
 
+Path the command to wherever the skill is installed, and leave `$CLAUDE_FILE_PATHS` unquoted — it arrives as a list of paths, and a quoted list is one path that matches nothing (which the engine now refuses with exit 1).
+
 A `Stop` hook with the same command (no `|| true`) closes the loop: the task does not end while findings exist. Findings reach the agent as `file:line:col [rule] severity: message` — one rule per line, a message that names the fix.
 
-**MCP.** `scripts/mcp-server.py` speaks JSON-RPC 2.0 over stdio on the standard library alone — no SDK, no network, auditable in one file. Three tools: `critique` (paths, allow, strict), `list_rules` (the registry), `token` (exact names from the export; `gray-7` is an error, not a guess). Register:
+**MCP.** `scripts/mcp-server.py` speaks JSON-RPC 2.0 over stdio on the standard library alone — no SDK, no network, auditable in one file. Three tools: `critique` (paths, allow, strict), `list_rules` (the registry), `token` (exact names from the export — `space-4`, `color.light.ink`, a bare role with a theme; `gray-7` is an error, not a guess). Register:
 
 ```
 claude mcp add -s user dpill -- python3 /path/to/d-pill/scripts/mcp-server.py
@@ -93,7 +95,7 @@ Any MCP client takes the same command. The server never dies mid-conversation: i
     paths: src/,docs/
 ```
 
-The inputs are the CLI's: `paths`, `allow`, `strict`. A red check is a finding list, not a screenshot. This repo's own CI runs the whole contract on every push: the export is true, the registry agrees with the engine, every rule fires where it should, the demo and the law pass their own gate, and the demo's stylesheet has not drifted from the authority.
+The inputs are the CLI's: `paths`, `allow`, `strict`. A red check is a finding list, not a screenshot. This repo's own CI runs the whole contract on every push to main and on every pull request: the export is true, the registry agrees with the engine, every rule fires where it should, the skill file is spec-legal with agreeing versions, the demo, the law, and the proof page pass their own gate, the MCP server answers with resolvable names, a broken invocation is refused rather than passed, and the demo's stylesheet has not drifted from the authority.
 
 ## An index for machines
 

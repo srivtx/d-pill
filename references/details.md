@@ -18,7 +18,7 @@ Icons are one set. Stroke 1.5, round caps and joins for a grotesque, butt caps f
 
 A count is a number. A red circle is not a personality. Use `--danger` on the word or the number only when the person must act.
 
-Avatars are circles from the space scale (24, 32, or 40). A light photo gets a 1px `--line` or it dissolves. Initials use `--font-text`.
+Avatars are circles from the space scale (24, 32, or 48). A light photo gets a 1px `--line` or it dissolves. Initials use `--font-text`.
 
 ## Focus, press, selection
 

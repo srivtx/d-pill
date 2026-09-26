@@ -11,7 +11,8 @@ enforces between base.css and the export.
 Findings are written to stderr, one per line:
     file:line:col [dpill/rule-id] severity: message
 Exit codes: 0 clean (warnings allowed unless --strict), 2 findings, 1 the
-invocation itself is broken. Exit 2 with stderr is the Claude Code hook
+invocation itself is broken — including a path that does not exist or is
+not HTML/CSS. Exit 2 with stderr is the Claude Code hook
 contract: the agent receives the findings as the reason to react.
 
 Usage:
@@ -36,7 +37,7 @@ RULES_FILE = ROOT / "references" / "rules.json"
 TOKENS_FILE = ROOT / "references" / "tokens.json"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
-VERSION = "1.5.0"
+VERSION = "1.5.1"
 
 # Fallback scales (rem). Overridden by tokens.json when it is present.
 FALLBACK = {
@@ -136,6 +137,11 @@ LENGTH_SPLIT_RE = re.compile(r"[,\s]+")
 EASE_KEYWORDS = {"linear", "ease", "ease-in", "ease-out", "ease-in-out", "step-start", "step-end"}
 ALLOWED_BEZIERS = {"0.16, 1, 0.3, 1", "0.7, 0, 0.84, 0"}
 
+def _strip_vars(value):
+    """Remove var(...) spans so literals beside token references still check."""
+    return re.sub(r"var\([^)]*\)", " ", value)
+
+
 HOVER_RE = re.compile(r":hover\b")
 FOCUS_RE = re.compile(r":focus(?:-visible)?\b")
 REDUCED_RE = re.compile(r"prefers-reduced-motion")
@@ -161,6 +167,22 @@ def walk(paths):
         elif p.is_file() and p.suffix.lower() in (CSS_SUFFIXES | HTML_SUFFIXES) \
                 and not SKIP_FILE.search(p.name):
             yield p
+
+
+def unusable_paths(paths):
+    """Path arguments that can yield nothing: missing, or not HTML/CSS.
+
+    A gate that silently checks zero files is a false clean — the worst
+    failure a gate can have. Call this before collect().
+    """
+    broken = []
+    for raw in paths:
+        p = Path(raw)
+        if not p.exists():
+            broken.append("{} (no such file or directory)".format(raw))
+        elif p.is_file() and p.suffix.lower() not in (CSS_SUFFIXES | HTML_SUFFIXES):
+            broken.append("{} (not an HTML or CSS file)".format(raw))
+    return broken
 
 
 class Finding(object):
@@ -251,10 +273,11 @@ def check_css_line(line, lineno, path, scales, findings, state):
     for m in TIME_SHORT.finditer(line):
         value = m.group(2)
         prop = m.group(1)
-        if "var(" in value:
-            pass
-        else:
-            for tm in MS_RE.finditer(value):
+        # var() spans are stripped first: a literal beside a token reference
+        # is still a literal. calc()/clamp() stay exempt — a computation is
+        # a named decision.
+        if "calc(" not in value and "clamp(" not in value:
+            for tm in MS_RE.finditer(_strip_vars(value)):
                 ms = float(tm.group(1)) * (1000 if tm.group(2) == "s" else 1)
                 if ms in (0.0, 0.01):
                     continue  # the reduced-motion disable, not a duration
@@ -271,8 +294,17 @@ def check_css_line(line, lineno, path, scales, findings, state):
     for m in TIMING_SHORT.finditer(line):
         _check_easing(m.group(2), path, lineno, m.start(2), findings)
     for m in TIME_SHORT.finditer(line):
-        if m.group(1) == "transition" and "var(" not in m.group(2):
-            _check_easing(m.group(2), path, lineno, m.start(2), findings)
+        prop = m.group(1)
+        if prop in ("transition", "animation"):
+            value = m.group(2)
+            if "calc(" in value or "clamp(" in value:
+                continue
+            stripped = _strip_vars(value)
+            if prop == "animation":
+                # linear in an animation is constant velocity — mechanical,
+                # not an interaction curve. Ambient loops may be linear.
+                stripped = re.sub(r"\blinear\b", " ", stripped)
+            _check_easing(stripped, path, lineno, m.start(2), findings)
     for m in COLOR_PROPS.finditer(line):
         value = m.group(2)
         if "var(" in value:
@@ -316,7 +348,8 @@ A_RE = re.compile(r"<(a)\b[^>]*href=[^>]*>(.*?)</a>", re.I | re.S)
 TAG_STRIP_RE = re.compile(r"<[^>]+>")
 INLINE_STYLE_RE = re.compile(r"style\s*=\s*\"([^\"]*)\"", re.I)
 WATCHED_INLINE = re.compile(
-    r"(?:^|[;])(font-size|padding|margin|gap|border-radius|width|height)\s*:\s*[^;]*[0-9]", re.I)
+    r"(?:^|[;])(font-size|padding|margin|gap|border-radius|width|height)\s*:\s*"
+    r"(?![^;]*var\()[^;]*\d", re.I)
 
 
 def attrs_of(tag):
@@ -400,7 +433,7 @@ def _linked_flags(path, text, flags):
 
 
 def collect(paths, allow=(), strict=False):
-    """The callable API. Returns (findings, stats) for humans, hooks, and MCP."""
+    """The callable API. Returns (findings, stats, failed) for humans, hooks, and MCP."""
     scales = build_scales()
     allow = set(allow or [])
     findings = []
@@ -556,6 +589,12 @@ def main(argv):
     if not paths:
         print(__doc__)
         return 1
+    broken = unusable_paths(paths)
+    if broken:
+        for b in broken:
+            print("error: " + b, file=sys.stderr)
+        print("the invocation is broken; nothing was checked", file=sys.stderr)
+        return 1
     ok, problems = registry_sync()
     if not ok:
         print("REGISTRY DRIFT — refusing to run an unverified rule set:", file=sys.stderr)
@@ -571,8 +610,9 @@ def main(argv):
     else:
         for f in shown:
             print(f.human(), file=sys.stderr)
-        print("{} files checked — {} error(s), {} warning(s){}.".format(
-            stats["files"], stats["errors"], stats["warnings"],
+        print("{} file{} checked — {} error(s), {} warning(s){}.".format(
+            stats["files"], "" if stats["files"] == 1 else "s",
+            stats["errors"], stats["warnings"],
             "; exit 2" if failed else ""))
     return 2 if failed else 0
 

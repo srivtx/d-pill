@@ -18,7 +18,7 @@ The unset page is even. Same gap everywhere. Same size type. Same weight. Same b
 
 Beauty is uneven on purpose.
 
-- One thing is large. The rest is plainly smaller. Adjacent steps on the type ramp (16 next to 18) do not count as a choice. Skip a step.
+- One thing is large. The rest is plainly smaller. Adjacent steps on the type ramp (15 next to 18) do not count as a choice. Skip a step.
 - One thing is the accent. A large area stays quiet: low chroma, the paper, the ink.
 - One gap is tight, because those items are a group. The next gap is obviously wider.
 - One edge is shared by almost everything. One element may cross it, once, and that crossing has to be the point (a photograph bleeding off the frame, a caption in the margin).

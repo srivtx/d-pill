@@ -20,11 +20,42 @@ jobs:
       - name: Every rule fires where it should
         run: python3 scripts/critique.py --selftest
 
+      - name: The skill file is spec-legal and the versions agree
+        run: python3 scripts/check-skill.py
+
       - name: The demo passes its own gate
         run: python3 scripts/critique.py docs/index.html
 
+      - name: The proof page passes its own gate
+        run: python3 scripts/critique.py docs/soft.html
+
+      - name: The recipe and the proof page are the same file
+        run: |
+          python3 - <<'PY'
+          import re, pathlib
+          md = pathlib.Path('references/soft.md').read_text(encoding='utf-8')
+          html = pathlib.Path('docs/soft.html').read_text(encoding='utf-8')
+          recipe = re.search(r'```css\n(.*?)\n```', md, re.S).group(1).strip()
+          marker = '/* ===== soft.md override, pasted verbatim ===== */'
+          page = html[html.index(marker) + len(marker):html.index('/* ===== demo page wiring ===== */')].strip()
+          assert recipe == page, 'soft.md recipe and docs/soft.html have drifted apart'
+          print('recipe and proof page agree')
+          PY
+
       - name: The law passes its own scales
         run: python3 scripts/critique.py docs/base.css
+
+      - name: The MCP server speaks and its token tool knows its own names
+        run: python3 scripts/mcp-smoke.py
+
+      - name: A broken invocation is refused, not passed
+        run: |
+          set +e
+          python3 scripts/critique.py no/such/path 2>refused.txt
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          cat refused.txt
 
       - name: The demo stylesheet has not drifted from the authority
         run: diff -q docs/base.css references/base.css

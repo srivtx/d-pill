@@ -1,0 +1,13 @@
+# d-pill — the site
+
+> The live demo of d-pill, a design skill for agents that build interfaces.
+> The canonical repository is github.com/srivtx/d-pill; this site serves its
+> demo pages straight from `docs/`, no build step.
+
+- [index.html](index.html): the demo page — the Spec direction, the tokens, and the components, built from base.css alone. Passes its own gate in CI.
+- [soft.html](soft.html): the proof page for the Soft editorial recipe — soft surfaces, the status strip, the craft exception's motion, in both themes.
+- [base.css](base.css): the tokens and the classes, byte-identical to the authority in the repository.
+
+The procedure, the rules, and the gate live in the repository:
+https://github.com/srivtx/d-pill — SKILL.md is the entry point; the full
+index for crawlers is the `llms.txt` at the repository root.

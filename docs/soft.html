@@ -3,15 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>soft editorial — recipe check</title>
-<link rel="stylesheet" href="../references/base.css">
+<title>soft editorial — the proof page</title>
+<link rel="stylesheet" href="base.css">
 <style>
 /* ===== soft.md override, pasted verbatim ===== */
+/* Soft editorial. Paste after base.css. */
 :root {
   --font-display: "Instrument Serif", Georgia, serif;
   --font-text: "Space Grotesk", "Instrument Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
   --radius-lg: 16px;
+  /* ambient loop clocks — the written exception. The duration scale governs
+     interaction; loops run on named durations and easings of their own. */
+  --loop-eq: 1s;
+  --loop-ping: 2s;
+  --loop-marquee: 48s;
+  --loop-ease: ease-in-out;
   --soft-lift:
     0 1px 2px oklch(0.25 0.02 var(--hue) / 0.05),
     0 8px 24px oklch(0.25 0.02 var(--hue) / 0.05);
@@ -23,6 +30,8 @@ html[data-theme="dark"] {
   --soft-lift: 0 8px 24px oklch(0.05 0.01 var(--hue) / 0.35);
   --soft-lift-hover: 0 12px 32px oklch(0.05 0.01 var(--hue) / 0.45);
 }
+
+/* the surface. Border and shadow together: the one written exception. */
 .card-soft {
   background: var(--surface);
   border: var(--border);
@@ -33,6 +42,8 @@ html[data-theme="dark"] {
     border-color var(--dur-1) var(--ease-out);
 }
 .card-soft:hover { box-shadow: var(--soft-lift-hover); }
+
+/* the one quote */
 .quote {
   font-family: var(--font-display);
   font-style: italic;
@@ -40,7 +51,11 @@ html[data-theme="dark"] {
   line-height: 1.1;
   max-width: 28ch;
 }
+
+/* the journal rules */
 .rule-dashed { border: 0; border-top: 1px dashed var(--line-strong); }
+
+/* the status strip */
 .strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -56,28 +71,39 @@ html[data-theme="dark"] {
   border: var(--border);
   background: var(--bg-subtle);
 }
+
+/* one live dot per strip */
 .dot-live { position: relative; width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--ok); }
 .dot-live::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit;
   background: var(--ok);
-  animation: ping 2s var(--ease-out) infinite;
+  animation: ping var(--loop-ping) var(--ease-out) infinite;
 }
 @keyframes ping { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.4); opacity: 0; } }
-.eq { display: flex; gap: 3px; height: 14px; align-items: flex-end; }
-.eq span { width: 3px; border-radius: 1px; background: var(--ok); animation: eq 1s ease-in-out infinite; }
+
+/* equalizer bars — a state, paused with the audio */
+.eq { display: flex; gap: calc(var(--space-1) / 2); height: 14px; align-items: flex-end; }
+.eq span { width: 3px; border-radius: var(--radius-full); background: var(--ok); animation: eq var(--loop-eq) var(--loop-ease) infinite; }
 .eq span:nth-child(2) { animation-delay: 0.15s; }
 .eq span:nth-child(3) { animation-delay: 0.3s; }
 .eq span:nth-child(4) { animation-delay: 0.45s; }
 .eq[data-idle] span { animation-play-state: paused; }
 @keyframes eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+
+/* reveal once. The .js class is set by a script before paint;
+   without it nothing is ever hidden. */
 .js .reveal { opacity: 0; transform: translateY(8px); }
 .reveal.in { opacity: 1; transform: none; }
 .reveal { transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out); }
+
+/* media zoom under a clip; the chrome stays still */
 .media { overflow: hidden; border-radius: var(--radius-lg); }
 .media img, .media video { transition: transform var(--dur-2) var(--ease-out); }
 .media:hover img, .media:hover video { transform: scale(1.05); }
+
+/* one marquee strip. Duplicate the list for the -50% loop. */
 .marquee { overflow: hidden; }
-.marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: marquee 48s linear infinite; }
+.marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: marquee var(--loop-marquee) linear infinite; }
 .marquee:hover ul { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -88,7 +114,7 @@ html[data-theme="dark"] {
   background-size: 0% 1px, 0% 1px;
   background-position: left bottom, right bottom;
   background-repeat: no-repeat;
-  padding-bottom: 1px;
+  padding-bottom: calc(var(--space-1) / 4);
   transition: background-size var(--dur-1) var(--ease-out);
 }
 .link-underline:hover,
@@ -122,11 +148,11 @@ html[data-theme="dark"] {
 }
 
 /* ===== demo page wiring ===== */
-.banner { background: oklch(0.25 0.04 250); color: oklch(0.95 0.01 250); padding: var(--space-7) var(--space-5); }
+.banner { background: oklch(0.25 0.04 var(--hue)); color: oklch(0.95 0.01 var(--hue)); padding: var(--space-7) var(--space-5); }
 .demo { max-width: 46rem; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-9); }
 label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
-.glyph { width: 4rem; height: 4rem; display: grid; place-items: center; background: linear-gradient(135deg, oklch(0.93 0.03 215), oklch(0.88 0.05 215)); color: oklch(0.3 0.03 215); }
-html[data-theme="dark"] .glyph { background: linear-gradient(135deg, oklch(0.4 0.07 215), oklch(0.3 0.06 215)); color: oklch(0.95 0.01 215); }
+.glyph { width: 4rem; height: 4rem; display: grid; place-items: center; background: linear-gradient(135deg, oklch(0.93 0.03 var(--hue)), oklch(0.88 0.05 var(--hue))); color: oklch(0.3 0.03 var(--hue)); }
+html[data-theme="dark"] .glyph { background: linear-gradient(135deg, oklch(0.4 0.07 var(--hue)), oklch(0.3 0.06 var(--hue))); color: oklch(0.95 0.01 var(--hue)); }
 /* the magnetized control row: the controls carry the transition so the follow eases */
 .magnet-row { display: flex; gap: var(--space-2); align-items: center; }
 .magnet { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: var(--border); border-radius: var(--radius); background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px oklch(0.25 0.02 var(--hue) / 0.05); transition: transform var(--dur-1) var(--ease-out); }

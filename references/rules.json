@@ -44,7 +44,7 @@
       "severity": "error",
       "target": "css",
       "summary": "transition/animation duration is not on the duration scale",
-      "check": "ms/s literals in transition, animation, and their -duration forms against 120ms, 180ms, 240ms. 0 and 0.01ms (the reduced-motion disable) pass.",
+      "check": "ms/s literals in transition, animation, and their -duration forms against 120ms, 180ms, 240ms — var() spans are stripped first, so a literal beside a token reference is still checked. 0 and 0.01ms (the reduced-motion disable) pass.",
       "fix": "--dur-1, --dur-2, --dur-3. The scale is the discipline; a 300ms hover is a different page.",
       "reference": "references/interaction.md"
     },
@@ -53,7 +53,7 @@
       "severity": "warn",
       "target": "css",
       "summary": "timing function is not a system curve",
-      "check": "easing keywords and cubic-bezier() literals against the two system curves. var(--ease-*) and spring() pass.",
+      "check": "easing keywords and cubic-bezier() literals in transitions and animations (shorthand included) against the two system curves. var(--ease-*) and spring() pass; linear in an animation is constant velocity and passes.",
       "fix": "--ease-out (arrival), --ease-in (exit). A new curve is a written exception with the reason.",
       "reference": "references/interaction.md"
     },
@@ -107,7 +107,7 @@
       "severity": "warn",
       "target": "html",
       "summary": "sizing literals inside a style attribute",
-      "check": "style=\"...\" containing font-size/padding/margin/gap/border-radius/width/height with a number.",
+      "check": "style=\"...\" containing font-size/padding/margin/gap/border-radius/width/height with a literal number; var() references pass.",
       "fix": "Classes and vars. A style attribute with literals in it is a token system nobody uses.",
       "reference": "references/foundations.md"
     },

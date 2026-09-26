@@ -28,6 +28,7 @@ import critique  # noqa: E402
 
 SERVER_INFO = {"name": "d-pill", "version": critique.VERSION}
 PROTOCOL = "2025-06-18"
+KNOWN_PROTOCOLS = ("2024-11-05", "2025-03-26", "2025-06-18")
 
 TOOLS = [
     {
@@ -58,8 +59,10 @@ TOOLS = [
     {
         "name": "token",
         "description": "Read one token value from the verified export "
-                       "references/tokens.json. Use exact names: 'space-4', "
-                       "'color.light.ink', 'type.ramp.text-lg', 'motion.dur-1'.",
+                       "references/tokens.json. Exact dotted paths "
+                       "('color.light.ink', 'motion.dur-1', 'type.ramp.text-lg'), "
+                       "scale names ('space-4', 'text-lg', 'dur-1'), or a bare "
+                       "role ('ink') with an optional theme.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -79,6 +82,10 @@ def tool_critique(args):
             "critique needs a non-empty 'paths' array of files or directories.")]}
     allow = args.get("allow") or []
     strict = bool(args.get("strict"))
+    broken = critique.unusable_paths(paths)
+    if broken:
+        return {"isError": True, "content": [_text(
+            "not usable as HTML/CSS paths: " + "; ".join(broken))]}
     findings, stats, failed = critique.collect(paths, allow, strict)
     payload = {
         "summary": stats,
@@ -110,29 +117,41 @@ def _dig(data, dotted):
 
 
 def tool_token(args):
-    name = str(args.get("name", ""))
+    name = str(args.get("name", "")).strip()
     theme = args.get("theme")
+    if theme not in ("light", "dark"):
+        theme = None
     try:
         data = json.loads(critique.TOKENS_FILE.read_text())
     except (OSError, ValueError) as e:
         return {"isError": True, "content": [_text("tokens.json unreadable: " + str(e))]}
+    # Resolution order: the exact dotted path as given, a theme-qualified
+    # role, the light default, then the scale parents. Bare roles ('ink')
+    # and dash names ('space-4', 'dur-1') resolve through the same list.
+    leaf = name.split(".")[-1]
+    candidates = [name]
+    if theme:
+        candidates.append("color." + theme + "." + leaf)
+    candidates.append("color." + name)          # color.hue, color.chroma-neutral
+    candidates.append("color.light." + leaf)    # bare role: ink, bg-subtle
+    candidates.append("color.dark." + leaf)
+    for prefix in ("space.scale", "type.ramp", "shape", "motion",
+                   "z", "layout", "font"):
+        candidates.append(prefix + "." + name)
     value = None
-    if "color." in name and theme:
-        value = _dig(data, "color." + theme + "." + name.split(".")[-1])
-    if value is None and not name.startswith("color."):
-        value = _dig(data, name.replace("-", "."))
-    if value is None and not name.startswith("color."):
-        # 'space-4' -> space.scale.space-4; 'text-lg' -> type.ramp.text-lg
-        value = _dig(data, "space.scale." + name) or _dig(data, "type.ramp." + name) \
-            or _dig(data, "shape." + name) or _dig(data, "motion." + name) \
-            or _dig(data, "z." + name) or _dig(data, "layout." + name) \
-            or _dig(data, "font." + name)
+    resolved = None
+    for c in candidates:
+        v = _dig(data, c)
+        if v is not None and not isinstance(v, dict):
+            value, resolved = v, c
+            break
     if value is None:
         return {"isError": True, "content": [_text(
-            "no token named '{}' in the export. Exact names only — "
-            "'space-4', 'color.light.ink', 'motion.dur-1'.".format(name))]}
-    return {"content": [_text(json.dumps({"name": name, "value": value},
-                                         indent=2))]}
+            "no token named '{}' in the export. Exact names: 'space-4', "
+            "'color.light.ink', 'motion.dur-1', 'type.ramp.text-lg', or a bare "
+            "role ('ink') with an optional theme.".format(name))]}
+    return {"content": [_text(json.dumps(
+        {"name": name, "path": resolved, "value": value}, indent=2))]}
 
 
 def _text(s):
@@ -153,8 +172,9 @@ def respond(req):
     method = req.get("method", "")
     rid = req.get("id")
     if method == "initialize":
+        requested = str((req.get("params") or {}).get("protocolVersion") or "")
         return _ok(rid, {
-            "protocolVersion": PROTOCOL,
+            "protocolVersion": requested if requested in KNOWN_PROTOCOLS else PROTOCOL,
             "capabilities": {"tools": {}},
             "serverInfo": SERVER_INFO,
         })

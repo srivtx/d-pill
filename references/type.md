@@ -50,7 +50,7 @@ Hyphenate only in a long measure of prose, with `hyphens: auto` and the right `l
 
 ## Links and underlines
 
-Prose links are underlined. The underline skips the descenders (`text-decoration-skip-ink` is on). Nav links are not underlined. Do not invent a second link style (a colored pill, a gradient underline, an animated underline).
+Prose links are underlined. The underline skips the descenders (`text-decoration-skip-ink` is on). Nav links are not underlined. Do not invent a second link style (a colored pill, a gradient underline, an animated underline). The one exception is the drawn underline in `soft.md` — the craft style's single hover answer, not a second style beside it.
 
 ## What not to set
 

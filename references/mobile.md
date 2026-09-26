@@ -12,7 +12,7 @@ The top bar is the name and one action. Everything else is behind Menu, as `base
 
 ## Type
 
-Body stays at least 16px on a phone. Inputs are already 16px on coarse pointers in `base.css`, because smaller type zooms the page on focus. Do not override that.
+Inputs stay 16px on a phone, and `base.css` already sets that on coarse pointers — smaller type zooms the page on focus. Do not override it. Body follows the committed density: the compact directions ship `--text-md` at 15px by decision, not accident.
 
 Display type drops one step from the desktop clamp. It does not stay at 72px and wrap one word per line. If the headline's line breaks were set with `<br>` for desktop, give the phone its own breaks. A phrase that was beautiful at 1280 can become a tower at 390.
 

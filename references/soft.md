@@ -46,6 +46,7 @@ These are the craft exception's allowances, from `interaction.md`. What they buy
 - One spring curve per surface, on one element: `cubic-bezier(0.2, 1.4, 0.4, 1)`. Not a token. Not reused.
 - The theme flip: View Transitions API, a circle that wipes from the toggle in ~450ms. No support: instant swap. `prefers-reduced-motion` already collapses it in `base.css`.
 - A machine that runs may animate its own glyph: equalizer bars while audio plays. It stops when the thing stops, because it is a state, not a decoration.
+- Ambient loops run on the named clocks in the override — `--loop-eq`, `--loop-ping`, `--loop-marquee`, `--loop-ease`. The duration scale governs interaction, not loops; the names are the written exception, and the gate reads them as decisions.
 - One marquee strip, 30–70s, pause on hover. A second marquee is a costume.
 - One mascot, at most 40px, on the bottom edge, out of the flow, never over a target. It is Play borrowed for the last 40 pixels of the page.
 - An inline text link may grow an underline on hover: one 1px `currentColor` line drawn from the middle outward (`background-size`, no extra element), `--dur-1`. Pick one hover answer per link — a row that already answers with color does not also get the underline. Headings and buttons never carry it.
@@ -64,7 +65,7 @@ Same-gray dents, text in the shadow color, focus by shadow, a squircle on every 
 
 ## The override
 
-Paste after `base.css`. This is the style, as code. It renders as written — `scripts/soft-check.html` is the proof page, checked in both themes:
+Paste after `base.css`. This is the style, as code. It renders as written — `docs/soft.html` is the proof page, checked in both themes:
 
 ```css
 /* Soft editorial. Paste after base.css. */
@@ -73,6 +74,12 @@ Paste after `base.css`. This is the style, as code. It renders as written — `s
   --font-text: "Space Grotesk", "Instrument Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
   --radius-lg: 16px;
+  /* ambient loop clocks — the written exception. The duration scale governs
+     interaction; loops run on named durations and easings of their own. */
+  --loop-eq: 1s;
+  --loop-ping: 2s;
+  --loop-marquee: 48s;
+  --loop-ease: ease-in-out;
   --soft-lift:
     0 1px 2px oklch(0.25 0.02 var(--hue) / 0.05),
     0 8px 24px oklch(0.25 0.02 var(--hue) / 0.05);
@@ -131,13 +138,13 @@ html[data-theme="dark"] {
 .dot-live::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit;
   background: var(--ok);
-  animation: ping 2s var(--ease-out) infinite;
+  animation: ping var(--loop-ping) var(--ease-out) infinite;
 }
 @keyframes ping { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.4); opacity: 0; } }
 
 /* equalizer bars — a state, paused with the audio */
-.eq { display: flex; gap: 3px; height: 14px; align-items: flex-end; }
-.eq span { width: 3px; border-radius: 1px; background: var(--ok); animation: eq 1s ease-in-out infinite; }
+.eq { display: flex; gap: calc(var(--space-1) / 2); height: 14px; align-items: flex-end; }
+.eq span { width: 3px; border-radius: var(--radius-full); background: var(--ok); animation: eq var(--loop-eq) var(--loop-ease) infinite; }
 .eq span:nth-child(2) { animation-delay: 0.15s; }
 .eq span:nth-child(3) { animation-delay: 0.3s; }
 .eq span:nth-child(4) { animation-delay: 0.45s; }
@@ -157,7 +164,7 @@ html[data-theme="dark"] {
 
 /* one marquee strip. Duplicate the list for the -50% loop. */
 .marquee { overflow: hidden; }
-.marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: marquee 48s linear infinite; }
+.marquee ul { display: flex; gap: var(--space-4); width: max-content; animation: marquee var(--loop-marquee) linear infinite; }
 .marquee:hover ul { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -168,7 +175,7 @@ html[data-theme="dark"] {
   background-size: 0% 1px, 0% 1px;
   background-position: left bottom, right bottom;
   background-repeat: no-repeat;
-  padding-bottom: 1px;
+  padding-bottom: calc(var(--space-1) / 4);
   transition: background-size var(--dur-1) var(--ease-out);
 }
 .link-underline:hover,

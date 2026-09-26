@@ -18,7 +18,7 @@ description: >
 license: MIT
 metadata:
   short-description: Interfaces that look decided
-  version: "1.5"
+  version: "1.5.1"
 ---
 
 # d-pill

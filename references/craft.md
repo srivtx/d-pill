@@ -32,7 +32,7 @@ This is the difference between a page that fills a template and a page that was 
 
 Squint. You should still be able to point at the first thing, the sections, and the action.
 
-The claim is at least twice the body size on a marketing page. In a tool, the title is `--text-xl` and the meta is `--text-sm`; the gap between them is `--space-1` or `--space-2`, and the gap before the work is a density step larger.
+The claim is at least twice the body size on a marketing page — and the poster headline is the harder case, 2.5 and up, per `proportion.md`. In a tool, the title is `--text-xl` and the meta is `--text-sm`; the gap between them is `--space-1` or `--space-2`, and the gap before the work is a density step larger.
 
 Do not give the eyebrow, the claim, the lede, the button, and the proof the same contrast. The claim is ink and large. The lede is ink and short. The proof is `.quiet`. The button is the accent. The eyebrow, if you need one, is a single `.caps`.
 
