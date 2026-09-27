@@ -10,10 +10,13 @@ enforces between base.css and the export.
 
 Findings are written to stderr, one per line:
     file:line:col [dpill/rule-id] severity: message
-Exit codes: 0 clean (warnings allowed unless --strict), 2 findings, 1 the
-invocation itself is broken — including a path that does not exist or is
-not HTML/CSS. Exit 2 with stderr is the Claude Code hook
-contract: the agent receives the findings as the reason to react.
+Every finding teaches: the message carries it, and --json adds the registry's
+fix and the reference file behind the rule, so a hook or a pipeline can point
+the agent at the reading without a lookup. Exit codes: 0 clean (warnings
+allowed unless --strict), 2 findings, 1 the invocation itself is broken —
+including a path that does not exist or is not HTML/CSS. Exit 2 with stderr
+is the Claude Code hook contract: the agent receives the findings as the
+reason to react.
 
 Usage:
     python3 scripts/critique.py [options] path [path ...]
@@ -37,7 +40,7 @@ RULES_FILE = ROOT / "references" / "rules.json"
 TOKENS_FILE = ROOT / "references" / "tokens.json"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
-VERSION = "1.5.1"
+VERSION = "1.6.0"
 
 # Fallback scales (rem). Overridden by tokens.json when it is present.
 FALLBACK = {
@@ -186,20 +189,32 @@ def unusable_paths(paths):
 
 
 class Finding(object):
-    __slots__ = ("file", "line", "col", "rule", "severity", "message")
+    __slots__ = ("file", "line", "col", "rule", "severity", "message",
+                 "fix", "ref")
 
     def __init__(self, file, line, col, rule, severity, message):
         self.file, self.line, self.col = file, line, col
         self.rule, self.severity, self.message = rule, severity, message
+        self.fix, self.ref = "", ""
 
     def human(self):
-        return "{}:{}:{} [{}] {}: {}".format(
+        line = "{}:{}:{} [{}] {}: {}".format(
             self.file, self.line, self.col, self.rule, self.severity, self.message)
+        if self.ref:
+            line += " See: {}.".format(self.ref)
+        return line
 
     def data(self):
-        return {"file": self.file, "line": self.line, "col": self.col,
-                "rule": self.rule, "severity": self.severity,
-                "message": self.message}
+        out = {"file": self.file, "line": self.line, "col": self.col,
+               "rule": self.rule, "severity": self.severity,
+               "message": self.message}
+        # the teaching half: what the registry says to do, and where to read
+        # the law behind it. Findings that teach get fixed, not memorized.
+        if self.fix:
+            out["fix"] = self.fix
+        if self.ref:
+            out["ref"] = self.ref
+        return out
 
 
 def add(findings, path, lineno, col, rule, severity, message):
@@ -464,6 +479,13 @@ def collect(paths, allow=(), strict=False):
         findings.append(Finding("(project)", 1, 1, "dpill/no-reduced-motion", "warn",
                                 "transitions or animations are used but no scanned file "
                                 "carries prefers-reduced-motion. base.css ships it; use it."))
+    # stamp every finding with the registry's teaching: the fix and the
+    # reference file behind the rule. A finding a hook consumer can act on
+    # without a lookup is the difference between a gate and a scolding.
+    teach = rule_teaching()
+    for f in findings:
+        fix, ref = teach.get(f.rule, ("", ""))
+        f.fix, f.ref = fix, ref
     findings = [f for f in findings if f.rule not in allow]
     findings.sort(key=lambda f: (f.severity != "error", str(f.file), f.line))
     stats = {
@@ -490,8 +512,26 @@ RULE_IDS = [
 ]
 
 
+def rule_teaching():
+    """{rule id: (fix, reference)} from the registry, or {} if unreadable.
+
+    The registry is the data half of 'findings that teach'; collect() stamps
+    every finding with it so no consumer has to look the rule up.
+    """
+    try:
+        data = json.loads(RULES_FILE.read_text())
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for r in data.get("rules", []):
+        out[r.get("id")] = (str(r.get("fix") or ""),
+                             str(r.get("reference") or ""))
+    return out
+
+
 def registry_sync():
-    """Every rule implemented appears in rules.json; every entry is real."""
+    """Every rule implemented appears in rules.json; every entry is real,
+    teaches (a fix), and points at a file that exists."""
     try:
         data = json.loads(RULES_FILE.read_text())
     except (OSError, ValueError) as e:
@@ -504,6 +544,15 @@ def registry_sync():
     for rid in declared:
         if rid not in RULE_IDS:
             problems.append("in rules.json but not implemented: " + rid)
+    for r in data.get("rules", []):
+        rid = str(r.get("id"))
+        if not str(r.get("fix") or "").strip():
+            problems.append("registry entry teaches nothing (missing fix): " + rid)
+        ref = str(r.get("reference") or "").strip()
+        if not ref:
+            problems.append("registry entry has no reference file: " + rid)
+        elif not (ROOT / ref).is_file():
+            problems.append("reference does not resolve: {} (rule {})".format(ref, rid))
     return (not problems), problems
 
 
@@ -516,7 +565,8 @@ def list_rules():
         rows = []
     print("d-pill machine gate — {} rules (v{})".format(len(rows), VERSION))
     for r in rows:
-        print("  {:<34} {:<6} {}".format(r["id"], r["severity"], r["summary"]))
+        print("  {:<34} {:<6} {}  ->  {}".format(
+            r["id"], r["severity"], r["summary"], r.get("reference", "")))
     if problems:
         print("REGISTRY DRIFT:")
         for p in problems:

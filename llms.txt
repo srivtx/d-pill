@@ -2,7 +2,7 @@
 
 > A design skill for agents that build interfaces. d-pill commits one visual direction, sets type and color as roles, and passes a critique gate before the work is called done. The critique has a machine half now: rules as data, a zero-dependency checker, an MCP server, and a GitHub Action. MIT, offline, no dependencies.
 
-The procedure is SKILL.md. The knowledge is references/. The values are references/tokens.json, verified against references/base.css by scripts/check-tokens.py. The gate is scripts/critique.py, its registry references/rules.json.
+The procedure is SKILL.md. The knowledge is references/. The values are references/tokens.json, verified against references/base.css by scripts/check-tokens.py; references/tokens.dtcg.json is the same values in the DTCG standard shape for design tools. The gate is scripts/critique.py, its registry references/rules.json.
 
 Install with `git clone https://github.com/srivtx/d-pill.git ~/.agents/skills/d-pill` (Claude Code: `~/.claude/skills`), or `npx skills add srivtx/d-pill`, or Claude Code: `/plugin marketplace add srivtx/d-pill`, then `/plugin install d-pill@d-pill`.
 
@@ -25,7 +25,8 @@ Install with `git clone https://github.com/srivtx/d-pill.git ~/.agents/skills/d-
 - [foundations.md](references/foundations.md): the tokens, the roles, how to edit them.
 - [base.css](references/base.css): the tokens and the classes — the authority.
 - [tokens.json](references/tokens.json): the machine export of base.css, verified.
-- [rules.json](references/rules.json): the machine rule registry — the gate's rules as data.
+- [tokens.dtcg.json](references/tokens.dtcg.json): the DTCG standard shape of the same 85 values — Tokens Studio, Style Dictionary, Figma interop.
+- [rules.json](references/rules.json): the machine rule registry — the gate's rules as data; every entry carries a fix and a reference.
 - [layout.md](references/layout.md): primitives, density, breakpoints.
 - [arrange.md](references/arrange.md): which container — list, table, gallery, form, feed.
 - [geometry.md](references/geometry.md): optical alignment, radius, bleed, crops.
@@ -59,20 +60,23 @@ Install with `git clone https://github.com/srivtx/d-pill.git ~/.agents/skills/d-
 ## repo
 
 - [CHANGELOG.md](CHANGELOG.md): versioned release notes.
+- [CONTRIBUTING.md](CONTRIBUTING.md): the contributor contract — the laws, a rule proposal, the local loop.
 - [SECURITY.md](SECURITY.md): the security posture — offline, deterministic, standard library only.
 - [ROADMAP.md](ROADMAP.md): signal-gated bets and the never list.
 
 ## scripts
 
-- [critique.py](scripts/critique.py): the machine gate. Zero dependencies. Findings as file:line:col [rule] severity. Exit 0 clean, 2 findings, 1 broken invocation.
+- [critique.py](scripts/critique.py): the machine gate. Zero dependencies. Findings as file:line:col [rule] severity, each carrying its fix and reference. Exit 0 clean, 2 findings, 1 broken invocation.
 - [mcp-server.py](scripts/mcp-server.py): d-pill over MCP (stdio, JSON-RPC 2.0, standard library only). Tools: critique, list_rules, token.
 - [check-tokens.py](scripts/check-tokens.py): verifies tokens.json against base.css.
+- [export-dtcg.py](scripts/export-dtcg.py): writes and verifies the DTCG export (--check).
 - [contrast.py](scripts/contrast.py): contrast for a custom OKLCH pair.
-- [check-skill.py](scripts/check-skill.py): verifies SKILL.md frontmatter against the spec, and that the versions agree.
-- [mcp-smoke.py](scripts/mcp-smoke.py): drives the MCP server through a real session; asserts the token tool's names resolve.
+- [check-skill.py](scripts/check-skill.py): verifies SKILL.md frontmatter against the spec, that the versions agree, and that the changelog carries the version.
+- [mcp-smoke.py](scripts/mcp-smoke.py): drives the MCP server through a real session; asserts the token tool's names resolve and findings teach.
 
 ## docs
 
 - [docs/index.html](docs/index.html): the demo page. It passes its own gate, in CI, on every push.
 - [docs/soft.html](docs/soft.html): the proof page for the Soft editorial recipe — the override, rendered and gated.
+- [docs/og.png](docs/og.png): the social preview image, generated from the real token colors.
 - [docs/llms.txt](docs/llms.txt): the site index for crawlers, served at the Pages root.

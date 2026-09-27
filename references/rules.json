@@ -1,7 +1,7 @@
 {
   "$format": "d-pill machine rule registry v1. The engine is scripts/critique.py; it verifies this file matches its implementation before every run. Severity 'error' fails the gate; 'warn' is a judgment call to read, not ignore. Suppression (--allow, or the CI input of the same name) is a written exception: it belongs in the commit that uses it, not in memory.",
   "$scales": "Every scale this registry checks is read from references/tokens.json — the verified export of base.css. When the export changes, the gate changes with it. There is no second set of numbers.",
-  "$findings": "file:line:col [dpill/rule-id] severity: message. Exit 0 clean, 2 findings, 1 broken invocation. Exit 2 with stderr is the Claude Code hook contract: the agent receives the findings as the reason to react.",
+  "$findings": "file:line:col [dpill/rule-id] severity: message, with the fix and the reference file appended (--json carries them as fields). Exit 0 clean, 2 findings, 1 broken invocation. Exit 2 with stderr is the Claude Code hook contract: the agent receives the findings as the reason to react. Every entry here must carry a fix and a reference that resolves — an entry that cannot teach is drift.",
   "rules": [
     {
       "id": "dpill/space-off-scale",

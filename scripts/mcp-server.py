@@ -34,9 +34,11 @@ TOOLS = [
     {
         "name": "critique",
         "description": "Run the d-pill machine gate on HTML/CSS paths. Returns "
-                       "findings as file:line:col [rule] severity: message, plus a "
-                       "summary. Exit semantics are folded into the payload: "
-                       "errors>0 means fix before calling the UI done.",
+                       "findings as file:line:col [rule] severity: message — "
+                       "each carrying its fix and the reference file behind "
+                       "the rule — plus a summary. Exit semantics are folded "
+                       "into the payload: errors>0 means fix before calling "
+                       "the UI done.",
         "inputSchema": {
             "type": "object",
             "properties": {

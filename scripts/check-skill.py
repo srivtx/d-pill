@@ -95,6 +95,17 @@ def main():
         problems.append("versions disagree: "
                         + ", ".join("{}={}".format(k, v) for k, v in versions.items()))
 
+    # The changelog must carry a section for the version being shipped.
+    changelog = ""
+    try:
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    except OSError:
+        problems.append("CHANGELOG.md is unreadable")
+    if versions and changelog:
+        agreed = sorted(set(versions.values()))[-1]
+        if "## {}".format(agreed) not in changelog:
+            problems.append("CHANGELOG.md has no section for version " + agreed)
+
     body = text.split("---", 2)[-1]
     if len(body.splitlines()) >= 500:
         problems.append("SKILL.md body is {} lines; the spec recommends <500".format(len(body.splitlines())))

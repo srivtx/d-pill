@@ -1,0 +1,440 @@
+{
+  "$description": "d-pill design tokens — the DTCG export of references/tokens.json, the verified export of base.css. Generate: python3 scripts/export-dtcg.py. Verify: python3 scripts/export-dtcg.py --check.",
+  "$schema": "https://tr.designtokens.org/format/",
+  "color": {
+    "light": {
+      "$description": "The role palette in its light state. Pairs with dark; emit one or neither.",
+      "bg": {
+        "$type": "color",
+        "$value": "oklch(0.985 0.008 215)"
+      },
+      "bg-subtle": {
+        "$type": "color",
+        "$value": "oklch(0.965 0.008 215)"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "oklch(0.995 0.004 215)"
+      },
+      "ink": {
+        "$type": "color",
+        "$value": "oklch(0.27 0.018 215)"
+      },
+      "ink-muted": {
+        "$type": "color",
+        "$value": "oklch(0.46 0.016 215)"
+      },
+      "line": {
+        "$type": "color",
+        "$value": "oklch(0.86 0.01 215)"
+      },
+      "line-strong": {
+        "$type": "color",
+        "$value": "oklch(0.62 0.016 215)"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "oklch(0.47 0.12 215)"
+      },
+      "accent-ink": {
+        "$type": "color",
+        "$value": "oklch(0.985 0.005 215)"
+      },
+      "accent-soft": {
+        "$type": "color",
+        "$value": "oklch(0.94 0.025 215)"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "oklch(0.47 0.12 215)"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "oklch(0.47 0.15 25)"
+      },
+      "danger-ink": {
+        "$type": "color",
+        "$value": "oklch(0.985 0.005 25)"
+      },
+      "danger-soft": {
+        "$type": "color",
+        "$value": "oklch(0.95 0.02 25)"
+      },
+      "ok": {
+        "$type": "color",
+        "$value": "oklch(0.42 0.09 155)"
+      },
+      "warn": {
+        "$type": "color",
+        "$value": "oklch(0.45 0.09 70)"
+      },
+      "border": {
+        "$type": "strokeStyle",
+        "$value": {
+          "lineWidth": "1px",
+          "style": "solid",
+          "color": "oklch(0.86 0.01 215)"
+        }
+      },
+      "border-strong": {
+        "$type": "strokeStyle",
+        "$value": {
+          "lineWidth": "1px",
+          "style": "solid",
+          "color": "oklch(0.62 0.016 215)"
+        }
+      },
+      "shadow-overlay": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "offsetX": "0px",
+            "offsetY": "16px",
+            "blur": "40px",
+            "spread": "0px",
+            "color": "oklch(0.25 0.02 215 / 0.16)"
+          }
+        ]
+      }
+    },
+    "dark": {
+      "$description": "The role palette in its dark state. Pairs with light; emit one or neither.",
+      "bg": {
+        "$type": "color",
+        "$value": "oklch(0.17 0.008 215)"
+      },
+      "bg-subtle": {
+        "$type": "color",
+        "$value": "oklch(0.21 0.01 215)"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "oklch(0.2 0.01 215)"
+      },
+      "ink": {
+        "$type": "color",
+        "$value": "oklch(0.93 0.008 215)"
+      },
+      "ink-muted": {
+        "$type": "color",
+        "$value": "oklch(0.74 0.014 215)"
+      },
+      "line": {
+        "$type": "color",
+        "$value": "oklch(0.32 0.01 215)"
+      },
+      "line-strong": {
+        "$type": "color",
+        "$value": "oklch(0.55 0.014 215)"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "oklch(0.78 0.12 215)"
+      },
+      "accent-ink": {
+        "$type": "color",
+        "$value": "oklch(0.18 0.02 215)"
+      },
+      "accent-soft": {
+        "$type": "color",
+        "$value": "oklch(0.28 0.03 215)"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "oklch(0.78 0.12 215)"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "oklch(0.74 0.12 25)"
+      },
+      "danger-ink": {
+        "$type": "color",
+        "$value": "oklch(0.18 0.03 25)"
+      },
+      "danger-soft": {
+        "$type": "color",
+        "$value": "oklch(0.28 0.04 25)"
+      },
+      "ok": {
+        "$type": "color",
+        "$value": "oklch(0.78 0.09 155)"
+      },
+      "warn": {
+        "$type": "color",
+        "$value": "oklch(0.82 0.09 75)"
+      },
+      "border": {
+        "$type": "strokeStyle",
+        "$value": {
+          "lineWidth": "1px",
+          "style": "solid",
+          "color": "oklch(0.32 0.01 215)"
+        }
+      },
+      "border-strong": {
+        "$type": "strokeStyle",
+        "$value": {
+          "lineWidth": "1px",
+          "style": "solid",
+          "color": "oklch(0.55 0.014 215)"
+        }
+      },
+      "shadow-overlay": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "offsetX": "0px",
+            "offsetY": "16px",
+            "blur": "40px",
+            "spread": "0px",
+            "color": "oklch(0.05 0.01 215 / 0.55)"
+          }
+        ]
+      }
+    },
+    "hue": {
+      "$type": "number",
+      "$value": 215.0,
+      "$description": "The one re-tint value. Change hue alone; the lightness and chroma structure stays."
+    },
+    "chroma-neutral": {
+      "$type": "number",
+      "$value": 0.008,
+      "$description": "The chroma of the neutral surfaces."
+    }
+  },
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": [
+        "Instrument Sans",
+        "Avenir Next",
+        "Segoe UI",
+        "sans-serif"
+      ]
+    },
+    "text": {
+      "$type": "fontFamily",
+      "$value": [
+        "Instrument Sans",
+        "Avenir Next",
+        "Segoe UI",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Mono",
+        "ui-monospace",
+        "monospace"
+      ]
+    }
+  },
+  "type": {
+    "ramp": {
+      "$description": "The type ramp. 16px is the coarse-pointer input exception, not a text size.",
+      "text-xs": {
+        "$type": "dimension",
+        "$value": "0.75rem"
+      },
+      "text-sm": {
+        "$type": "dimension",
+        "$value": "0.8125rem"
+      },
+      "text-md": {
+        "$type": "dimension",
+        "$value": "0.9375rem"
+      },
+      "text-lg": {
+        "$type": "dimension",
+        "$value": "1.125rem"
+      },
+      "text-xl": {
+        "$type": "dimension",
+        "$value": "1.5rem"
+      },
+      "text-2xl": {
+        "$type": "dimension",
+        "$value": "2.25rem"
+      },
+      "text-3xl": {
+        "$type": "dimension",
+        "$value": "3.5rem"
+      }
+    },
+    "leading-display": {
+      "$type": "number",
+      "$value": 1.05,
+      "$description": "Line height as a unitless ratio."
+    },
+    "leading-ui": {
+      "$type": "number",
+      "$value": 1.35,
+      "$description": "Line height as a unitless ratio."
+    },
+    "leading-body": {
+      "$type": "number",
+      "$value": 1.55,
+      "$description": "Line height as a unitless ratio."
+    },
+    "tracking-display": {
+      "$type": "dimension",
+      "$value": "-0.02em"
+    },
+    "tracking-caps": {
+      "$type": "dimension",
+      "$value": "0.06em"
+    }
+  },
+  "space": {
+    "scale": {
+      "$description": "The space scale. Most steps go unused on a given screen; the unused space is the design.",
+      "space-1": {
+        "$type": "dimension",
+        "$value": "0.25rem"
+      },
+      "space-2": {
+        "$type": "dimension",
+        "$value": "0.5rem"
+      },
+      "space-3": {
+        "$type": "dimension",
+        "$value": "0.75rem"
+      },
+      "space-4": {
+        "$type": "dimension",
+        "$value": "1rem"
+      },
+      "space-5": {
+        "$type": "dimension",
+        "$value": "1.5rem"
+      },
+      "space-6": {
+        "$type": "dimension",
+        "$value": "2rem"
+      },
+      "space-7": {
+        "$type": "dimension",
+        "$value": "3rem"
+      },
+      "space-8": {
+        "$type": "dimension",
+        "$value": "4rem"
+      },
+      "space-9": {
+        "$type": "dimension",
+        "$value": "6rem"
+      },
+      "space-10": {
+        "$type": "dimension",
+        "$value": "8rem"
+      }
+    }
+  },
+  "shape": {
+    "$description": "Corner radii. radius-full is the circle.",
+    "radius-sm": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "radius-lg": {
+      "$type": "dimension",
+      "$value": "10px"
+    },
+    "radius-full": {
+      "$type": "dimension",
+      "$value": "999px"
+    }
+  },
+  "motion": {
+    "$description": "Durations for interactions; easings as system curves. Ambient loops are a written exception, not a token.",
+    "dur-1": {
+      "$type": "duration",
+      "$value": "120ms"
+    },
+    "dur-2": {
+      "$type": "duration",
+      "$value": "180ms"
+    },
+    "dur-3": {
+      "$type": "duration",
+      "$value": "240ms"
+    },
+    "ease-out": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.16,
+        1.0,
+        0.3,
+        1.0
+      ]
+    },
+    "ease-in": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.7,
+        0.0,
+        0.84,
+        0.0
+      ]
+    }
+  },
+  "z": {
+    "sticky": {
+      "$type": "number",
+      "$value": 10,
+      "$description": "A layer declares itself; 9999 is an unmapped stack."
+    },
+    "dropdown": {
+      "$type": "number",
+      "$value": 20,
+      "$description": "A layer declares itself; 9999 is an unmapped stack."
+    },
+    "drawer": {
+      "$type": "number",
+      "$value": 40,
+      "$description": "A layer declares itself; 9999 is an unmapped stack."
+    },
+    "dialog": {
+      "$type": "number",
+      "$value": 50,
+      "$description": "A layer declares itself; 9999 is an unmapped stack."
+    },
+    "toast": {
+      "$type": "number",
+      "$value": 60,
+      "$description": "A layer declares itself; 9999 is an unmapped stack."
+    }
+  },
+  "layout": {
+    "measure": {
+      "$type": "dimension",
+      "$value": "68ch"
+    },
+    "page": {
+      "$type": "dimension",
+      "$value": "72rem"
+    },
+    "control-h": {
+      "$type": "dimension",
+      "$value": "2.25rem"
+    },
+    "header-h": {
+      "$type": "dimension",
+      "$value": "3.5rem"
+    },
+    "section-pad": {
+      "$type": "dimension",
+      "$value": "4rem"
+    },
+    "row-pad": {
+      "$type": "dimension",
+      "$value": "0.75rem"
+    }
+  }
+}

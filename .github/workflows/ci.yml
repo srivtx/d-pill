@@ -14,6 +14,9 @@ jobs:
       - name: The token export is true
         run: python3 scripts/check-tokens.py
 
+      - name: The DTCG export is true
+        run: python3 scripts/export-dtcg.py --check
+
       - name: The rule registry agrees with the engine
         run: python3 scripts/critique.py --list-rules
 

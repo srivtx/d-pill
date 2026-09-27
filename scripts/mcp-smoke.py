@@ -84,13 +84,19 @@ def main():
     if not isinstance(p7, dict) or not isinstance(p7.get("summary"), dict) \
             or p7["summary"].get("errors", 0) < 1:
         problems.append("critique on the bad fixture did not report errors")
+    findings7 = (p7.get("findings") or []) if isinstance(p7, dict) else []
+    if not findings7 or not all(f.get("ref") and f.get("fix")
+                                for f in findings7):
+        problems.append("critique findings do not carry their teaching "
+                        "(fix + reference per finding)")
 
     if problems:
         for p in problems:
             print("FAIL  " + p)
         print("raw stdout tail:", proc.stdout[-400:])
         return 1
-    print("PASS  MCP speaks; three tools; dotted names resolve; gray-7 refused; critique reports.")
+    print("PASS  MCP speaks; three tools; dotted names resolve; gray-7 refused; "
+          "critique reports, and every finding teaches.")
     return 0
 
 

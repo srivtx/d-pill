@@ -9,7 +9,7 @@
       "name": "d-pill",
       "source": "./",
       "description": "A design skill for agents that build interfaces. Commit a direction, ship the tokens, pass the machine gate.",
-      "version": "1.5.1",
+      "version": "1.6.0",
       "author": {
         "name": "srivtx"
       },

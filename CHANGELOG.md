@@ -2,7 +2,39 @@
 
 d-pill versions its releases. Every version lands in the same commit as the
 SKILL.md, plugin, and engine versions it ships — `scripts/check-skill.py`
-enforces the agreement in CI.
+enforces the agreement in CI, including the changelog section itself.
+
+## 1.6.0 — 2026-09-27
+
+The useful release. Findings teach, tokens speak the standard format, and
+a release is a tag away.
+
+- Findings that teach: every finding now carries the registry's fix and
+  the reference file behind its rule. The stderr line ends with
+  `See: references/…`; `--json` (and the MCP `critique` tool) carry them as
+  `fix` and `ref` fields, so a hook or a pipeline can point the agent at
+  the reading without a lookup. The registry law got stricter to match:
+  an entry without a fix, or with a reference that does not resolve, is
+  drift — the engine refuses to run it.
+- The DTCG export: `references/tokens.dtcg.json` is the Design Tokens
+  Community Group shape of the token system (85 tokens — color,
+  dimension, duration, cubicBezier, fontFamily, number, strokeStyle,
+  shadow). Tokens Studio, Style Dictionary, and the Figma plugins that
+  speak the standard consume it directly, so a design-tool pipeline and
+  the gate read the same numbers. `scripts/export-dtcg.py` writes it,
+  `--check` verifies it, and the no-silent-omissions law holds: a new
+  token nobody mapped fails the export.
+- Release automation: push a `vX.Y.Z` tag and the release workflow cuts
+  the GitHub release from the changelog section for that version. A
+  version without a section is not a release. The floating `v1` tag
+  still moves by hand, on purpose.
+- `CONTRIBUTING.md`: the four laws, the anatomy of a rule proposal, the
+  local loop, and the release procedure — the contributor contract.
+- `docs/og.png`: the social preview, generated offline from the real
+  token colors and the mark; both demo pages carry the `og:` metadata.
+- New guards in CI: the DTCG check, the changelog-section check in
+  `check-skill.py`, and the MCP smoke test now asserts every finding
+  carries its teaching.
 
 ## 1.5.1 — 2026-09-27
 

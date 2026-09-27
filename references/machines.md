@@ -14,7 +14,8 @@ The rules also have a machine half now: `scripts/critique.py` checks written HTM
 
 - The rules are data: `references/rules.json` is the registry — id, severity, target, what the engine checks, the fix, the reference file behind the rule. The engine verifies the registry matches its implementation before every run and refuses to run an unverified rule set. Drift between engine and registry is the bug, same as drift between `base.css` and the export.
 - The values it checks are the values in `tokens.json`. Change the export, and the gate changes with it. There is no second set of numbers anywhere.
-- Findings are `file:line:col [dpill/rule] severity: message`, one per line, on stderr. Exit 0 clean, 2 findings, 1 the invocation itself is broken — including a path that does not exist or is not HTML/CSS; a false clean is worse than a failure. `--json` for pipelines, `--quiet` errors-only, `--strict` warnings-count, `--list-rules` the registry, `--selftest` proves every rule fires.
+- Findings are `file:line:col [dpill/rule] severity: message`, one per line, on stderr, and every finding teaches: the message ends with `See: references/…`, and `--json` (plus the MCP `critique` tool) carries the registry's `fix` and `ref` fields. Exit 0 clean, 2 findings, 1 the invocation itself is broken — including a path that does not exist or is not HTML/CSS; a false clean is worse than a failure. `--json` for pipelines, `--quiet` errors-only, `--strict` warnings-count, `--list-rules` the registry, `--selftest` proves every rule fires.
+- The registry must be able to teach: every entry carries a fix worth reading and a reference that resolves to a real file, or the engine treats it as drift and refuses to run. An entry that cannot point at its own law is a rule nobody can follow.
 - Suppression is a written exception: `--allow dpill/z-off-scale` once, with the reason in the commit that uses it. A suppression that lives in someone's memory is a rule that no longer exists.
 - The honest scope: the machine checks scales (space, ramp, radius, duration, z), floors (alt, lang, names, hairlines), and tells (transition-all, literal colors). Direction, focal point, one material, one weather — that is the judgment half in `references/critique.md`. Zero machine findings is permission to be judged, not a pass.
 
@@ -40,6 +41,7 @@ Agents read everything they are given. They do not skim, and they do not infer p
 ## Feeding another tool
 
 - A pipeline consuming `tokens.json` should treat the `light` and `dark` groups as one palette in two states, the `hue-linked` note as a substitution instruction, and everything else as fixed.
+- A design tool that speaks the standard consumes `references/tokens.dtcg.json` instead — the same 85 values in the Design Tokens Community Group shape (`$value` + `$type`: color, dimension, duration, cubicBezier, fontFamily, number, strokeStyle, shadow). Tokens Studio, Style Dictionary, and the Figma plugins import it directly. `scripts/export-dtcg.py` writes it from `tokens.json`; `scripts/export-dtcg.py --check` verifies it in CI, under a no-silent-omissions law: a leaf in `tokens.json` nobody mapped fails the export rather than shipping as a quiet gap.
 - A code generator maps roles to component props, not to new names: `--danger` is the destructive fill, `--accent` is the one primary action, `--ok` and `--warn` are status text. The roles table in `foundations.md` is the contract.
 - A template engine should consume `.stack`, `.section`, `.rows`, `.cluster`, `.quiet`, `.caps` as the structural vocabulary instead of re-deriving layout from raw spacing. The classes already encode the rhythm rules.
 - When the target stack cannot hold OKLCH, convert once at build time, note the loss, and check the floors with `scripts/contrast.py` after conversion. Do not hand-tune per channel.
@@ -95,7 +97,7 @@ Any MCP client takes the same command. The server never dies mid-conversation: i
     paths: src/,docs/
 ```
 
-The inputs are the CLI's: `paths`, `allow`, `strict`. A red check is a finding list, not a screenshot. This repo's own CI runs the whole contract on every push to main and on every pull request: the export is true, the registry agrees with the engine, every rule fires where it should, the skill file is spec-legal with agreeing versions, the demo, the law, and the proof page pass their own gate, the MCP server answers with resolvable names, a broken invocation is refused rather than passed, and the demo's stylesheet has not drifted from the authority.
+The inputs are the CLI's: `paths`, `allow`, `strict`. A red check is a finding list, not a screenshot. This repo's own CI runs the whole contract on every push to main and on every pull request: the export is true, the DTCG export is true, the registry agrees with the engine and every entry teaches, every rule fires where it should, the skill file is spec-legal with agreeing versions and a changelog section, the demo, the law, and the proof page pass their own gate, the MCP server answers with resolvable names and findings that teach, a broken invocation is refused rather than passed, and the demo's stylesheet has not drifted from the authority. Pushing a `vX.Y.Z` tag hands the changelog section to the release workflow, which cuts the GitHub release; the floating `v1` tag moves by hand.
 
 ## An index for machines
 

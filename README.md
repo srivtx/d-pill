@@ -51,18 +51,17 @@ Most design systems are reading material. This one is executable. `scripts/criti
 ```
 $ python3 scripts/critique.py src/
 
-src/orders.css:41:8 [dpill/space-off-scale] error: 17px in padding is not on
-  the space scale (4px 8px 12px 16px 24px 32px 48px 64px 96px 128px). Use the
-  token, or write the exception down.
-src/orders.css:42:3 [dpill/transition-all] error: transition: all animates
-  layout. Name the properties that actually change.
+src/orders.css:1:19 [dpill/space-off-scale] error: 17px in padding is not on the space scale (4px 8px 12px 16px 24px 32px 48px 64px 96px 128px). Use the token, or write the exception down. See: references/foundations.md.
+src/orders.css:2:22 [dpill/transition-all] error: transition: all animates layout. Name the properties that actually change. See: references/interaction.md.
+(project):1:1 [dpill/no-reduced-motion] warn: transitions or animations are used but no scanned file carries prefers-reduced-motion. base.css ships it; use it. See: references/a11y.md.
 
-1 file checked — 2 error(s), 0 warning(s); exit 2.
+1 file checked — 2 error(s), 1 warning(s); exit 2.
 ```
 
 - **Rules as data.** The registry is `references/rules.json` — id, severity, what the engine checks, the fix, the reference behind each rule. The engine verifies the registry matches its implementation before every run, the same way `check-tokens.py` verifies the token export against `base.css`.
+- **Findings that teach.** Every finding carries the registry's fix and the reference file behind its rule — appended to the message, and as `fix`/`ref` fields in `--json` and the MCP tool. An agent in a hook can follow the pointer and self-correct without a lookup; the registry refuses an entry that cannot teach.
 - **The values are the export.** The scales the gate checks come from `tokens.json`. Change the export, the gate changes with it. No second set of numbers anywhere.
-- **The contract.** Findings on stderr as `file:line:col [rule] severity: message`. Exit 0 clean, 2 findings, 1 broken invocation. `--json` for pipelines, `--allow` for written exceptions, `--selftest` to prove every rule fires.
+- **The contract.** Findings on stderr as `file:line:col [rule] severity: message — see the reference`. Exit 0 clean, 2 findings, 1 broken invocation. `--json` for pipelines, `--allow` for written exceptions, `--selftest` to prove every rule fires.
 - **Zero dependencies.** Python's standard library and nothing else. Offline, auditable in one file.
 
 The same engine, three shells: the CLI; `scripts/mcp-server.py`, a stdlib-only MCP server (`claude mcp add -s user dpill -- python3 …/scripts/mcp-server.py`) with `critique`, `list_rules`, and `token` tools; and this repository is itself a GitHub Action:
@@ -93,7 +92,7 @@ Interfaces a person uses, and the new frontier: chat surfaces, copilots, agent c
 
 The 2025–26 moves are catalogued with entry gates in `references/frontier.md` — barely-there chrome, micro-interaction density, scrollytelling, page-transition identity, expressive letters, shader heroes, generative imagery, liquid glass, dense dark tools, adaptive pages. A trend that cannot write its own commitment paragraph is a vibe.
 
-And the whole system is machine-readable: `references/tokens.json` is the verified export of `base.css`, `references/rules.json` is the verified rule registry, and `references/machines.md` is how pipelines, hooks, MCP clients, and coding agents consume the values and the rules without inventing parallel token names.
+And the whole system is machine-readable: `references/tokens.json` is the verified export of `base.css`, `references/tokens.dtcg.json` is the same 85 values in the DTCG standard shape (Tokens Studio, Style Dictionary, Figma plugins import it directly), `references/rules.json` is the verified rule registry, and `references/machines.md` is how pipelines, hooks, MCP clients, and coding agents consume the values and the rules without inventing parallel token names.
 
 ## Directions
 
@@ -157,6 +156,7 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `references/ai-interfaces.md` | Chat, copilots, agent actions, streaming stability, approvals, generative UI |
 | `references/machines.md` | The machine contract: the gate, hooks, MCP, CI, verification |
 | `references/tokens.json` | The machine-readable token export, verified against `base.css` |
+| `references/tokens.dtcg.json` | The DTCG standard shape of the tokens — design-tool interop |
 | `references/rules.json` | The machine-readable rule registry, verified against the engine |
 | `references/frontier.md` | The 2025–26 moves, each with a gate and a refuse list |
 | `references/craft.md` | The visual tells and the fix for each |
@@ -167,6 +167,7 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `scripts/critique.py` | The machine half of the gate: the checker |
 | `scripts/mcp-server.py` | d-pill over MCP: critique, list_rules, token |
 | `scripts/check-tokens.py` | Verifies `tokens.json` against `base.css` |
+| `scripts/export-dtcg.py` | Writes and verifies the DTCG export (`--check`) |
 | `scripts/contrast.py` | Contrast for a custom OKLCH pair |
 | `action.yml` | This repo as a GitHub Action: the gate in CI |
 | `llms.txt` | The index for crawlers and agents |
@@ -175,6 +176,7 @@ Read `SKILL.md` first. It says which file to open. Do not load all of them for a
 | `scripts/check-skill.py` | Verifies SKILL.md spec-legality and version agreement |
 | `scripts/mcp-smoke.py` | Proves the MCP server speaks and its names resolve |
 | `CHANGELOG.md` | Versioned release notes |
+| `CONTRIBUTING.md` | The contributor contract: the laws, a rule proposal, the local loop |
 | `SECURITY.md` | The security posture: offline, deterministic, stdlib-only |
 | `ROADMAP.md` | Signal-gated bets and the never list |
 

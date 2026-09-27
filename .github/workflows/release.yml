@@ -1,0 +1,40 @@
+name: release
+
+# A release is a tag away: push vX.Y.Z and the changelog section for that
+# version becomes the GitHub release. The floating v1 tag does not move
+# itself — that stays a maintainer's hand, on purpose.
+
+on:
+  push:
+    tags: ['v[0-9]*.[0-9]*.[0-9]*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cut the release from the changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          if ! echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "$TAG is not a release tag; nothing to cut."
+            exit 0
+          fi
+          VERSION="${TAG#v}"
+          # the section for this version: its heading to the next heading
+          awk -v ver="$VERSION" '
+            index($0, "## " ver " ") == 1 { found = 1; next }
+            found && index($0, "## ") == 1 { exit }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          if [ ! -s notes.md ]; then
+            echo "CHANGELOG.md has no section for $VERSION. A release without notes is not a release." >&2
+            exit 1
+          fi
+          gh release create "$TAG" --title "d-pill $VERSION" --notes-file notes.md

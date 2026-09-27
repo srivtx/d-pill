@@ -4,14 +4,27 @@ Ambition parked where it cannot bloat the references. Each bet below waits
 for a signal, and the signal is named. Anything not on this list and not in
 the never list is probably a distraction — say so in an issue first.
 
+## Shipped ahead of signal
+
+Three bets left the table early, by owner decision, in 1.6.0 — the useful
+release. The signals had not arrived; the owner's ask stood in for them,
+and the record stays honest:
+
+- **The DTCG export** (`references/tokens.dtcg.json`, written and verified
+  by `scripts/export-dtcg.py`) — the Figma / Tokens Studio / Style
+  Dictionary interop bet, pulled forward with its no-silent-omissions law
+  intact.
+- **Findings that teach** — every finding carries the registry's fix and
+  reference; the registry refuses an entry that cannot teach. The `suggest`
+  field the bet proposed turned out to already exist as `fix` + `reference`.
+- **Release automation** — a `vX.Y.Z` tag hands the changelog section to the
+  release workflow. The floating `v1` tag still moves by hand.
+
 ## Signal-gated bets
 
 | Bet | Trigger | Shape |
 |---|---|---|
-| A DTCG/W3C design-token export beside `tokens.json` | ≥2 issues asking for Figma or Style Dictionary interop | a `$value`-shaped export, verified by the same check-tokens law |
-| Findings that teach: each rule carries the replacement token in its payload | hook users report agents cannot self-fix findings | registry entries gain a `suggest` field; the engine reads it |
 | A chrome-devtools-mcp pairing recipe in `machines.md` | repeated "gate passes but the page looks wrong" reports | docs only: computed styles against `tokens.json`, mid-task |
-| Release automation from `CHANGELOG.md` on tag push | releases become monthly | one small workflow |
 | Translated READMEs | clustered non-English traffic, or ≥3 requests for one language | `README.<lang>.md`; the SKILL.md body stays English — the register is the judgment |
 | Narrow direction proxies (a second accent hue with no written exception) | real reported misses, not vibes | one rule per miss; judgment stays human |
 | Show HN and the agentskills.io showcase | an awesome-list merge, ≥100 skills.sh installs, a clean release | a launch, not a feature |
